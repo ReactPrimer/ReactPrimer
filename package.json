@@ -1,0 +1,21 @@
+{
+  "name": "ReactPrimer",
+  "version": "1.0.0",
+  "description": "Production Project",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/ReactPrimer/ReactPrimer",
+  "author": "KVK",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.7.8",
+    "electron-prebuilt-compile": "^1.7.9",
+    "electron-reload": "^1.2.2"
+  },
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}
