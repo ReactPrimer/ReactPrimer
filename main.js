@@ -33,6 +33,11 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+   // As we are in windows, escape the slash with another
+   const configValues = require('./config');
+   BrowserWindow.addDevToolsExtension(configValues.absolutePath);
+
 }
 
 
