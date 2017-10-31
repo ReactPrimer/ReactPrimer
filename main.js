@@ -6,6 +6,7 @@ const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
 const url = require('url')
+const IPC = require('electron').ipcMain;
 
 require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
@@ -26,6 +27,10 @@ function createWindow() {
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 
+//this IPC is receiving info from the front end
+  IPC.on('treeInfo', function(event, argument){
+    console.log('argument',argument)
+  });
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
