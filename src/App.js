@@ -7,32 +7,43 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tree: "sample text",
+      tree: 'sample text',
       components: [
         {
-          name: "App",
-          child: ["Header", "Nav"]
-        },
-        {
-          name: "Header",
-          child: null
-        },
-        {
-          name: "Nav",
-          child: null
+          name: 'App',
+          child: []
         }
       ],
-      newComponent: {}
+      newName: '',
+      newParent: ''
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  addNewComponent() {
+  handleInputChange(e) {
+    this.setState({newName: e.target.value})
+  }
 
+  handleSelectChange(e) {
+    this.setState({newParent: e.target.value})
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    alert("The form was submitted.")
+    {/*
+      write logic to address parent-child relationships here
+      */}
+    this.setState((prevState, props) => {
+      return {
+        components: prevState.components.concat([
+          {
+            name: this.state.newName,
+          }
+        ])
+      }
+    })
   }
 
   componentWillMount() {
@@ -45,6 +56,10 @@ class App extends Component {
       <div>
         <h1>Hello KVK</h1>
         <NewCompForm
+          newName={this.state.newName}
+          newParent={this.props.newParent}
+          handleInputChange={this.handleInputChange}
+          handleSelectChange ={this.handleSelectChange}
           handleSubmit={this.handleSubmit}
           components={this.state.components}
           />
