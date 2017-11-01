@@ -12,11 +12,16 @@ function fileContent(component) {
     content+=`\nclass ${component.name} extends Component {\n`;
     content+=`  render() {\n`;
     content+=`    return (\n`;
-    content+=`      <div>\n\n`;
+    content+=`      <div>\n`;
+
+    for (let i = 0; i < component.child.length; i++)
+    {
+    content+=`        <${component.child[i]} />\n`;
+    }
     content+=`      </div>\n`;
-    content+=`     );\n`;
-    content+=`    };\n`;
-    content+=`  }\n`;
+    content+=`    );\n`;
+    content+=`  };\n`;
+    content+=`}\n`;
     content+=`export default ${component.name};`;
 
   return content;
