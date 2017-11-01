@@ -25,27 +25,26 @@ class NewCompForm extends Component {
           <form>
             Name:<br />
           <input
-            type="text"
-            name="name"
-            value={newName}
+            type='text'
+            name='name'
             onChange={handleInputChange}
             />
           <br />
           Parent:
           <br />
           <select
-            name="parent"
+            name='parent'
             value={newParent}
             onChange={handleSelectChange}
             >
-            <option value={null}>none</option>
+            <option />
             {parents}
           </select>
           <br />
           <br />
           <input
-            type="submit"
-            value="Add Component"
+            type='submit'
+            value='Add Component'
             onClick={handleSubmit}
             />
         </form>
