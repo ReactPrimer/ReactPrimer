@@ -3,7 +3,7 @@ const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const IPC = require('electron').ipcMain;
-const {dialog} = require('electron');
+const { dialog } = require('electron');
 
 const path = require('path')
 const url = require('url')
@@ -29,20 +29,22 @@ function createWindow() {
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 
-/* - the IPC listens for component info to be received from the front end.
-   - openDialog lets user to select where exported file folder will be generated.
-   - openDialog outputs the file directory (fileDir) that was chosen by the user.
-   - a directory gets created
-   - for each component filecontent is called and file is generated with its content.
-*/
-  IPC.on('treeInfo', (event, projName, components) => {
-    dialog.showOpenDialog({title:'please select where to export',
-    properties:['openDirectory']}, fileDir => {
-      let projDir = fileDir + '/' + projName;
+  /* - the IPC listens for component info to be received from the front end.
+     - openDialog lets user to select where exported file folder will be generated.
+     - openDialog outputs the file directory (fileDir) that was chosen by the user.
+     - a directory gets created.
+     - for each component filecontent is called and file is generated with its content.
+  */
+  IPC.on('componentTree', (event, components) => {
+    dialog.showOpenDialog({
+      title: 'please select where to export',
+      properties: ['openDirectory']
+    }, fileDir => {
+      let projDir = fileDir + '/components';
       fs.mkdirSync(projDir);
       for (let k = 0; k < components.length; k++) {
-        fs.writeFileSync(projDir+'/'+components[k].name+'.jsx',fileContent(components[k]),(err) => {
-          if (err) console.log('File i/o error ',err);
+        fs.writeFileSync(projDir + '/' + components[k].name + '.jsx', fileContent(components[k]), (err) => {
+          if (err) console.log('File i/o error ', err);
           return;
         });
       }
@@ -57,9 +59,9 @@ function createWindow() {
     mainWindow = null
   })
 
-   // As we are in windows, escape the slash with another
-   const configValues = require('./config');
-   BrowserWindow.addDevToolsExtension(configValues.absolutePath);
+  // As we are in windows, escape the slash with another
+  const configValues = require('./config');
+  BrowserWindow.addDevToolsExtension(configValues.absolutePath);
 
 }
 
