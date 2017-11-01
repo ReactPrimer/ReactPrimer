@@ -1,12 +1,16 @@
+// required electron modules
 const electron = require('electron')
-// Module to control application life.
 const app = electron.app
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
+const IPC = require('electron').ipcMain;
+const {dialog} = require('electron');
 
 const path = require('path')
 const url = require('url')
-const IPC = require('electron').ipcMain;
+const fs = require('fs');
+
+// file template generator function
+const fileContent = require('./fileContent.js')
 
 require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
@@ -14,10 +18,8 @@ require('electron-reload')(__dirname);
 let mainWindow
 
 function createWindow() {
-  // Create the browser window.
   mainWindow = new BrowserWindow({ width: 800, height: 600 })
 
-  // and load the index.html of the app.
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
@@ -27,10 +29,26 @@ function createWindow() {
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 
-//this IPC is receiving info from the front end
-  IPC.on('treeInfo', function(event, argument){
-    console.log('argument',argument)
+/* - the IPC listens for component info to be received from the front end.
+   - openDialog lets user to select where exported file folder will be generated.
+   - openDialog outputs the file directory (fileDir) that was chosen by the user.
+   - a directory gets created
+   - for each component filecontent is called and file is generated with its content.
+*/
+  IPC.on('treeInfo', (event, projName, components) => {
+    dialog.showOpenDialog({title:'please select where to export',
+    properties:['openDirectory']}, fileDir => {
+      let projDir = fileDir + '/' + projName;
+      fs.mkdirSync(projDir);
+      for (let k = 0; k < components.length; k++) {
+        fs.writeFileSync(projDir+'/'+components[k].name+'.jsx',fileContent(components[k]),(err) => {
+          if (err) console.log('File i/o error ',err);
+          return;
+        });
+      }
+    })
   });
+
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
@@ -67,6 +85,3 @@ app.on('activate', function () {
     createWindow()
   }
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
