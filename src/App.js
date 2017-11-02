@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import NewCompForm from './NewCompForm';
 const IPC = require('electron').ipcRenderer;
 
-{/*
-  TODO
-  write logic to:
-  - avoid duplicate component names
-  - require parent selection
-  - camel case component names
-  */}
 
 class App extends Component {
   constructor(props) {
@@ -29,32 +22,39 @@ class App extends Component {
     this.exportFiles = this.exportFiles.bind(this);
   }
 
+  // Updates a placeholder in state with text input value.
   handleInputChange(e) {
     this.setState({ newName: e.target.value })
   }
 
+  // Updates a placeholder in state with selected value.
   handleSelectChange(e) {
     this.setState({ newParent: e.target.value })
   }
 
+  // Submits form data and updates state with new component details.
   handleSubmit(e) {
-    e.preventDefault()
-    const newName = this.state.newName
-    const parent = this.state.newParent;
-    const comp = this.state.components.slice();
-    if (parent !== '') {
-      for (let i = 0; i < comp.length; i += 1) {
-        if (comp[i].name === parent) {
-          comp[i].child.push(newName)
-          break
+      e.preventDefault()
+      const newName = this.state.newName
+      const parent = this.state.newParent;
+      const comp = this.state.components.slice();
+      if (newName === '') {
+        alert('Please enter a component name.')
+      } else if (parent === '') {
+        alert('Please select a parent component.')
+      } else {
+        for (let i = 0; i < comp.length; i += 1) {
+          if (comp[i].name === parent) {
+            comp[i].child.push(newName)
+            break
+          }
         }
+        comp.push({
+          name: newName,
+          child: []
+        })
+        this.setState({ components: comp })
       }
-      comp.push({
-        name: newName,
-        child: []
-      })
-    }
-    this.setState({ components: comp })
   }
 
   exportFiles() {

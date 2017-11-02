@@ -12,6 +12,7 @@ class NewCompForm extends Component {
       components
     } = this.props
 
+    // Creates an option element in dropdown menu for each component name in state. 
     const parents = components.map((parent, index) => {
       return <option key={index} value={parent.name}>
         {parent.name}
