@@ -9,8 +9,6 @@ function flattenComponent(components, flattened = []) {
     flattenComponent(components[index].children, flattened);
   })
   return flattened;
+}
 
-
-  module.exports = flattenComponent;
-
-
+module.exports = flattenComponent
