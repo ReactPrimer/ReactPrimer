@@ -8,10 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       components: [
-        {
-          name: 'App',
-          child: []
-        }
+        {title:'a',children:[{title:'Ken',children:[]},{title:'b',children:[{title:'c',children:[]}]}]},{title:'d', children:[{title:'e',children:[]}]}
       ],
       newName: '',
       newParent: ''
