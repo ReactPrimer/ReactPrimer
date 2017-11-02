@@ -7,7 +7,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tree: 'sample text',
       components: [
         {
           name: 'App',
@@ -20,16 +19,17 @@ class App extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.exportFiles = this.exportFiles.bind(this);
   }
 
   // Updates a placeholder in state with text input value.
   handleInputChange(e) {
-    this.setState({newName: e.target.value})
+    this.setState({ newName: e.target.value })
   }
 
   // Updates a placeholder in state with selected value.
   handleSelectChange(e) {
-    this.setState({newParent: e.target.value})
+    this.setState({ newParent: e.target.value })
   }
 
   // Submits form data and updates state with new component details.
@@ -55,28 +55,30 @@ class App extends Component {
         })
         this.setState({ components: comp })
       }
-    }
-
-    componentWillMount() {
-      //this sends this.state.tree to the back end
-      IPC.send('treeInfo', this.state.tree);
-    }
-
-    render() {
-      return (
-        <div>
-          <h1>Hello KVK</h1>
-          <NewCompForm
-            newName={this.state.newName}
-            newParent={this.props.newParent}
-            handleInputChange={this.handleInputChange}
-            handleSelectChange ={this.handleSelectChange}
-            handleSubmit={this.handleSubmit}
-            components={this.state.components}
-            />
-        </div>
-      );
-    }
   }
 
-  export default App;
+  exportFiles() {
+    //function for sending data to Electron server
+    IPC.send('componentTree', this.state.components);
+
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello KVK</h1>
+        <NewCompForm
+          newName={this.state.newName}
+          newParent={this.props.newParent}
+          handleInputChange={this.handleInputChange}
+          handleSelectChange={this.handleSelectChange}
+          handleSubmit={this.handleSubmit}
+          components={this.state.components}
+        />
+        <button onClick={this.exportFiles}>Export Components</button>
+      </div>
+    );
+  }
+}
+
+export default App;
