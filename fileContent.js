@@ -4,25 +4,25 @@ function fileContent(component) {
 
   content +="import React, { Component } from 'react';\n";
 
-  for (let i = 0; i < component.child.length; i++)
+  for (let i = 0; i < component.children.length; i++)
     {
-      content+=`import ${component.child[i]} from './${component.child[i]}.jsx'\n`;
+      content+=`import ${component.children[i].title} from './${component.children[i].title}.jsx'\n`;
     }
 
-    content+=`\nclass ${component.name} extends Component {\n`;
+    content+=`\nclass ${component.title} extends Component {\n`;
     content+=`  render() {\n`;
     content+=`    return (\n`;
     content+=`      <div>\n`;
 
-    for (let i = 0; i < component.child.length; i++)
+    for (let i = 0; i < component.children.length; i++)
     {
-    content+=`        <${component.child[i]} />\n`;
+    content+=`        <${component.children[i].title} />\n`;
     }
     content+=`      </div>\n`;
     content+=`    );\n`;
     content+=`  };\n`;
     content+=`}\n`;
-    content+=`export default ${component.name};`;
+    content+=`export default ${component.title};`;
 
   return content;
 }
