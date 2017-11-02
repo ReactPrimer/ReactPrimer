@@ -1,16 +1,17 @@
 // required electron modules
-const electron = require('electron')
+const electron = require('electron');
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const IPC = require('electron').ipcMain;
 const { dialog } = require('electron');
 
-const path = require('path')
-const url = require('url')
+const path = require('path');
+const url = require('url');
 const fs = require('fs');
 
 // file template generator function
-const fileContent = require('./fileContent.js')
+const fileContent = require('./fileContent.js');
+const flattenComponent = require('./flattenComponent.js');
 
 require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
@@ -36,14 +37,17 @@ function createWindow() {
      - for each component filecontent is called and file is generated with its content.
   */
   IPC.on('componentTree', (event, components) => {
+    let flattenComps = flattenComponent(components);
+    console.log('flattenComps: ->', flattenComps);
     dialog.showOpenDialog({
       title: 'please select where to export',
       properties: ['openDirectory']
     }, fileDir => {
       let projDir = fileDir + '/components';
       fs.mkdirSync(projDir);
-      for (let k = 0; k < components.length; k++) {
-        fs.writeFileSync(projDir + '/' + components[k].name + '.jsx', fileContent(components[k]), (err) => {
+      for (let k = 0; k < flattenComps.length; k++) {
+        console.log('flattenComps[k]: ', flattenComps[k]);
+        fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]), (err) => {
           if (err) console.log('File i/o error ', err);
           return;
         });
