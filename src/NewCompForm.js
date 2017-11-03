@@ -2,20 +2,23 @@ import React, { Component } from 'react';
 
 
 class NewCompForm extends Component {
+
   render() {
     const {
       newName,
       newParent,
+      extractCompNames,
       handleInputChange,
       handleSelectChange,
       handleSubmit,
       components
     } = this.props
 
-    // Creates an option element in dropdown menu for each component name in state. 
-    const parents = components.map((parent, index) => {
-      return <option key={index} value={parent.name}>
-        {parent.name}
+    // Creates an option element in dropdown menu for each component name in state.
+    const componentNames = extractCompNames(components)
+    const parents = componentNames.map((parent, index) => {
+      return <option key={index} value={parent.title}>
+        {parent.title}
       </option>
     })
 
@@ -28,6 +31,7 @@ class NewCompForm extends Component {
           <input
             type='text'
             name='name'
+            value={newName}
             onChange={handleInputChange}
             />
           <br />
