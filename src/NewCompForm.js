@@ -2,20 +2,23 @@ import React, { Component } from 'react';
 
 
 class NewCompForm extends Component {
+
   render() {
     const {
       newName,
       newParent,
+      flattenComp,
       handleInputChange,
       handleSelectChange,
       handleSubmit,
       components
     } = this.props
 
-    // Creates an option element in dropdown menu for each component name in state. 
-    const parents = components.map((parent, index) => {
-      return <option key={index} value={parent.name}>
-        {parent.name}
+    // Creates an option element in dropdown menu for each component name in state.
+    const flattenedComponents = flattenComp(components)
+    const parents = flattenedComponents.map((parent, index) => {
+      return <option key={index} value={parent.title}>
+        {parent.title}
       </option>
     })
 
