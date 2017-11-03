@@ -7,7 +7,7 @@ class NewCompForm extends Component {
     const {
       newName,
       newParent,
-      flattenComp,
+      extractCompNames,
       handleInputChange,
       handleSelectChange,
       handleSubmit,
@@ -15,8 +15,8 @@ class NewCompForm extends Component {
     } = this.props
 
     // Creates an option element in dropdown menu for each component name in state.
-    const flattenedComponents = flattenComp(components)
-    const parents = flattenedComponents.map((parent, index) => {
+    const componentNames = extractCompNames(components)
+    const parents = componentNames.map((parent, index) => {
       return <option key={index} value={parent.title}>
         {parent.title}
       </option>

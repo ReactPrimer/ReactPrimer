@@ -12,67 +12,53 @@ class App extends Component {
         title: 'App',
         expanded: true,
         children: [
-          {
-            title: 'Value1',
-            expanded: true,
-            children: [{ title: 'Value1a', expanded: false, children: [] }]
-          },
-          {
-            title: 'Value2',
-            expanded: false,
-            children: []
-          },
-          {
-            title: 'Value3',
-            expanded: true,
-            children: [
-              {
-                title: 'Value3A',
-                expanded: false,
-                children: []
-              },
-              {
-                title: 'Value3B',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Value3C',
-                expanded: false,
-                children: []
-              },
-              {
-                title: 'Value3D',
-                expanded: false,
-                children: []
-              }
-            ]
-          }
+          // {
+          //   title: 'Navigation',
+          //   expanded: true,
+          //   children: [
+          //     {
+          //       title: 'Link',
+          //       expanded: false,
+          //       children: []
+          //     }
+          //   ]
+          // },
+          // {
+          //   title: 'SideBar',
+          //   expanded: false,
+          //   children: []
+          // },
+          // {
+          //   title: 'Products',
+          //   expanded: true,
+          //   children: [
+          //     {
+          //       title: 'Product',
+          //       expanded: false,
+          //       children: []
+          //     }
+          //   ]
+          // }
         ]
       }],
-      components: [
-        {
-          name: 'App',
-          child: []
-        }
-      ],
       newName: '',
       newParent: ''
     };
-    this.flattenComp = this.flattenComp.bind(this);
+    this.extractCompNames = this.extractCompNames.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.searchTreeData = this.searchTreeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.exportFiles = this.exportFiles.bind(this);
   }
 
-  flattenComp(components, flattened = []) {
+  // Helper function creates an array of all component names
+  extractCompNames(components, flattened = []) {
     components.forEach((element,index) => {
       let obj = {};
       obj['title'] = element.title;
-      // obj['children'] = element.children;
       flattened.push(obj);
-      this.flattenComp(components[index].children,flattened);
+      this.extractCompNames(components[index].children,flattened);
     })
     return flattened;
   }
@@ -87,72 +73,43 @@ class App extends Component {
     this.setState({ newParent: e.target.value })
   }
 
-  // Submits form data and updates state with new component details.
-  // handleSubmit(e) {
-  //   e.preventDefault()
-  //   const newName = this.state.newName
-  //   const parent = this.state.newParent;
-  //   const comp = this.state.components.slice();
-  //   if (newName === '') {
-  //     alert('Please enter a component name.')
-  //   } else if (parent === '') {
-  //     alert('Please select a parent component.')
-  //   } else {
-  //     for (let i = 0; i < comp.length; i += 1) {
-  //       if (comp[i].name === parent) {
-  //         comp[i].child.push(newName)
-  //         break
-  //       }
-  //     }
-  //     comp.push({
-  //       name: newName,
-  //       child: []
-  //     })
-  //     this.setState({ components: comp })
-  //   }
-  // }
-
-  searchTreeData(data, target) {
+  // Helper function finds parent in state, and update with new child element
+  searchTreeData(data, target, newName) {
     for(let i = 0; i < data.length; i += 1) {
-      console.log('i: ', i, '; data: ', data[i]);
+      // console.log('i: ', i, '; data: ', data[i]);
       let title = data[i].title
       if (title === target) {
-        console.log('Title: ', title, 'Name: ', target)
+        data[i].children.push({
+          title: newName,
+          expanded: true,
+          children: []
+        })
       }
       if (data[i].children) {
-        searchTreeData(data[i].children, target);
+        this.searchTreeData(data[i].children, target, newName);
       }
     }
   };
 
+  // Submits form data and updates state with new component details.
   handleSubmit(e) {
     e.preventDefault()
     const newName = this.state.newName
-    const parent = this.state.newParent;
-    const comp = this.state.treeData.slice();
+    const target = this.state.newParent;
+    const tree = this.state.treeData.slice();
     if (newName === '') {
       alert('Please enter a component name.')
-    } else if (parent === '') {
+    } else if (target === '') {
       alert('Please select a parent component.')
     } else {
-      for (let i = 0; i < comp.length; i += 1) {
-        if (comp[i].name === parent) {
-          comp[i].child.push(newName)
-          break
-        }
-      }
-      comp.push({
-        name: newName,
-        child: []
-      })
-      this.setState({ components: comp })
+      this.searchTreeData(tree, target, newName)
+      this.setState({ treeData: tree })
     }
   }
 
+  //function for sending data to Electron server
   exportFiles() {
-    //function for sending data to Electron server
-    IPC.send('componentTree', this.state.components);
-
+    IPC.send('componentTree', this.state.treeData);
   }
 
   render() {
@@ -162,7 +119,7 @@ class App extends Component {
         <NewCompForm
           newName={this.state.newName}
           newParent={this.props.newParent}
-          flattenComp={this.flattenComp}
+          extractCompNames={this.extractCompNames}
           handleInputChange={this.handleInputChange}
           handleSelectChange={this.handleSelectChange}
           handleSubmit={this.handleSubmit}
