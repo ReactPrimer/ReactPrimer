@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import SortableTree from 'react-sortable-tree';
 import NewCompForm from './NewCompForm';
 const IPC = require('electron').ipcRenderer;
@@ -105,6 +106,7 @@ class App extends Component {
       this.searchTreeData(tree, target, newName)
       this.setState({ treeData: tree })
     }
+    this.setState({ newName: '' })
   }
 
   //function for sending data to Electron server
@@ -118,7 +120,7 @@ class App extends Component {
         <h1>ReactPrimer</h1>
         <NewCompForm
           newName={this.state.newName}
-          newParent={this.props.newParent}
+          newParent={this.state.newParent}
           extractCompNames={this.extractCompNames}
           handleInputChange={this.handleInputChange}
           handleSelectChange={this.handleSelectChange}

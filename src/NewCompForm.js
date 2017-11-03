@@ -31,6 +31,7 @@ class NewCompForm extends Component {
           <input
             type='text'
             name='name'
+            value={newName}
             onChange={handleInputChange}
             />
           <br />
