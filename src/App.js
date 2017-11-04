@@ -13,33 +13,43 @@ class App extends Component {
         title: 'App',
         expanded: true,
         children: [
-          // {
-          //   title: 'Navigation',
-          //   expanded: true,
-          //   children: [
-          //     {
-          //       title: 'Link',
-          //       expanded: false,
-          //       children: []
-          //     }
-          //   ]
-          // },
-          // {
-          //   title: 'SideBar',
-          //   expanded: false,
-          //   children: []
-          // },
-          // {
-          //   title: 'Products',
-          //   expanded: true,
-          //   children: [
-          //     {
-          //       title: 'Product',
-          //       expanded: false,
-          //       children: []
-          //     }
-          //   ]
-          // }
+          {
+            title: 'Navigation',
+            expanded: true,
+            children: [
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              },
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              },
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              }
+            ]
+          },
+          {
+            title: 'SideBar',
+            expanded: true,
+            children: []
+          },
+          {
+            title: 'Products',
+            expanded: true,
+            children: [
+              {
+                title: 'Product',
+                expanded: true,
+                children: []
+              }
+            ]
+          }
         ]
       }],
       newName: '',
@@ -55,11 +65,15 @@ class App extends Component {
 
   // Helper function creates an array of all component names
   extractCompNames(components, flattened = []) {
+    const cache = {};
     components.forEach((element,index) => {
       let obj = {};
-      obj['title'] = element.title;
-      flattened.push(obj);
-      this.extractCompNames(components[index].children,flattened);
+      if (!cache[element.title]) {
+        cache[element.title] = true;
+        obj['title'] = element.title;
+        flattened.push(obj);
+        this.extractCompNames(components[index].children,flattened);
+      }
     })
     return flattened;
   }
