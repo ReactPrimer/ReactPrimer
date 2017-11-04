@@ -41,7 +41,8 @@ function createWindow() {
     console.log('flattenComps: ->', flattenComps);
     dialog.showOpenDialog({
       title: 'please select where to export',
-      properties: ['openDirectory']
+      properties: ['openDirectory'],
+      buttonLabel: 'Save'
     }, fileDir => {
       let projDir = fileDir + '/components';
       fs.mkdirSync(projDir);
