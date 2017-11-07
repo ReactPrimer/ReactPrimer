@@ -91,7 +91,8 @@ class App extends Component {
   // Formats casing and spacing, and removes file extenions from input
   formatName(userInput) {
     let result = userInput
-      .charAt(0).toUpperCase() + userInput.slice(1)
+      .replace(/^./g, x => x.toUpperCase())
+      //.charAt(0).toUpperCase() + userInput.slice(1)
       .replace(/\ \w/g, x => x[1].toUpperCase())
       .replace(/\..+$/, '');
     return result
