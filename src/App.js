@@ -15,43 +15,43 @@ class App extends Component {
         title: 'App',
         expanded: true,
         children: [
-          // {
-          //   title: 'Navigation',
-          //   expanded: true,
-          //   children: [
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     },
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     },
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     }
-          //   ]
-          // },
-          // {
-          //   title: 'SideBar',
-          //   expanded: true,
-          //   children: []
-          // },
-          // {
-          //   title: 'Products',
-          //   expanded: true,
-          //   children: [
-          //     {
-          //       title: 'Product',
-          //       expanded: true,
-          //       children: []
-          //     }
-          //   ]
-          // }
+          {
+            title: 'Navigation',
+            expanded: true,
+            children: [
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              },
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              },
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              }
+            ]
+          },
+          {
+            title: 'SideBar',
+            expanded: true,
+            children: []
+          },
+          {
+            title: 'Products',
+            expanded: true,
+            children: [
+              {
+                title: 'Product',
+                expanded: true,
+                children: []
+              }
+            ]
+          }
         ]
       }],
       newName: '',
@@ -104,27 +104,18 @@ class App extends Component {
   searchTreeData(data, target, newName) {
     let formattedName = this.formatName(newName)
     // if tree is empty, create first component at top-level
-    if (data.length === 0) {
-      data.push({
-        title: formattedName,
-        expanded: true,
-        children: []
-      })
-    }
-    else {
-      for (let i = 0; i < data.length; i += 1) {
-        // console.log('i: ', i, '; data: ', data[i]);
-        let title = data[i].title
-        if (title === target) {
-          data[i].children.push({
-            title: formattedName,
-            expanded: true,
-            children: []
-          })
-        }
-        if (data[i].children) {
-          this.searchTreeData(data[i].children, target, newName);
-        }
+    for (let i = 0; i < data.length; i += 1) {
+      // console.log('i: ', i, '; data: ', data[i]);
+      let title = data[i].title
+      if (title === target) {
+        data[i].children.push({
+          title: formattedName,
+          expanded: true,
+          children: []
+        })
+      }
+      if (data[i].children) {
+        this.searchTreeData(data[i].children, target, newName);
       }
     };
   }
@@ -138,61 +129,71 @@ class App extends Component {
     if (newName === '') {
       alert('Please enter a component name.')
     }
+    else if (tree.length === 0) {
+      console.log('tree: ', tree);
+      tree.push({
+        title: this.formatName(newName),
+        expanded: true,
+        children: []
+      })
+      this.setState({ treeData: tree })
+    }
     else {
       this.searchTreeData(tree, target, newName)
       this.setState({ treeData: tree })
     }
     this.setState({ newName: '' })
   }
+  
 
-  //function for sending data to Electron server
-  exportFiles() {
-    IPC.send('componentTree', this.state.treeData);
-  }
+//function for sending data to Electron server
+exportFiles() {
+  IPC.send('componentTree', this.state.treeData);
+}
 
-  render() {
-    // Nodekey used to identify node to be removed.
-    const getNodeKey = ({ treeIndex }) => treeIndex;
+render() {
+  // Nodekey used to identify node to be removed.
+  const getNodeKey = ({ treeIndex }) => treeIndex;
 
-    return (
-      <div>
-        <h1>ReactPrimer</h1>
-        <NewCompForm
-          newName={this.state.newName}
-          newParent={this.state.newParent}
-          extractCompNames={this.extractCompNames}
-          handleInputChange={this.handleInputChange}
-          handleSelectChange={this.handleSelectChange}
-          handleSubmit={this.handleSubmit}
-          components={this.state.treeData}
+  return (
+    <div>
+      <h1>ReactPrimer</h1>
+      <NewCompForm
+        newName={this.state.newName}
+        newParent={this.state.newParent}
+        extractCompNames={this.extractCompNames}
+        handleInputChange={this.handleInputChange}
+        handleSelectChange={this.handleSelectChange}
+        handleSubmit={this.handleSubmit}
+        components={this.state.treeData}
+      />
+      <br />
+      <button onClick={this.exportFiles}>Export Components</button>
+      <br />
+      <br />
+      <div style={{ height: 525 }}>
+        <SortableTree
+          treeData={this.state.treeData}
+          onChange={treeData => this.setState({ treeData })}
+          // button for removing component
+          generateNodeProps={({ node, path }) => ({
+            buttons: [
+              <button onClick={() => this.setState(state => ({
+                treeData: removeNodeAtPath({
+                  treeData:
+                  state.treeData,
+                  path,
+                  getNodeKey,
+                }),
+              }))}
+              >X</button>,
+            ],
+          })}
         />
-        <br />
-        <button onClick={this.exportFiles}>Export Components</button>
-        <br />
-        <br />
-        <div style={{ height: 525 }}>
-          <SortableTree
-            treeData={this.state.treeData}
-            onChange={treeData => this.setState({ treeData })}
-            // button for removing component
-            generateNodeProps={({ node, path }) => ({
-              buttons: [
-                <button onClick={() => this.setState(state => ({
-                  treeData: removeNodeAtPath({
-                    treeData:
-                    state.treeData,
-                    path,
-                    getNodeKey,
-                  }),
-                }))}
-                >X</button>,
-              ],
-            })}
-          />
-        </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 }
 
 export default App;
