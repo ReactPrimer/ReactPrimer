@@ -15,43 +15,43 @@ class App extends Component {
         title: 'App',
         expanded: true,
         children: [
-          {
-            title: 'Navigation',
-            expanded: true,
-            children: [
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              }
-            ]
-          },
-          {
-            title: 'SideBar',
-            expanded: true,
-            children: []
-          },
-          {
-            title: 'Products',
-            expanded: true,
-            children: [
-              {
-                title: 'Product',
-                expanded: true,
-                children: []
-              }
-            ]
-          }
+          // {
+          //   title: 'Navigation',
+          //   expanded: true,
+          //   children: [
+          //     {
+          //       title: 'Link',
+          //       expanded: true,
+          //       children: []
+          //     },
+          //     {
+          //       title: 'Link',
+          //       expanded: true,
+          //       children: []
+          //     },
+          //     {
+          //       title: 'Link',
+          //       expanded: true,
+          //       children: []
+          //     }
+          //   ]
+          // },
+          // {
+          //   title: 'SideBar',
+          //   expanded: true,
+          //   children: []
+          // },
+          // {
+          //   title: 'Products',
+          //   expanded: true,
+          //   children: [
+          //     {
+          //       title: 'Product',
+          //       expanded: true,
+          //       children: []
+          //     }
+          //   ]
+          // }
         ]
       }],
       newName: '',
@@ -60,11 +60,11 @@ class App extends Component {
     this.extractCompNames = this.extractCompNames.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.formatName = this.formatName.bind(this);
     this.searchTreeData = this.searchTreeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.exportFiles = this.exportFiles.bind(this);
   }
-
   // Helper function creates an array of all component names
   extractCompNames(components, flattened = []) {
     const cache = {};
@@ -90,12 +90,23 @@ class App extends Component {
     this.setState({ newParent: e.target.value })
   }
 
+  // Formats casing and spacing, and removes file extenions from input
+  formatName(userInput) {
+    let result = userInput
+      .replace(/^./g, x => x.toUpperCase())
+      //.charAt(0).toUpperCase() + userInput.slice(1)
+      .replace(/\ \w/g, x => x[1].toUpperCase())
+      .replace(/\..+$/, '');
+    return result
+  }
+
   // Helper function finds parent in state, and update with new child element
   searchTreeData(data, target, newName) {
+    let formattedName = this.formatName(newName)
     // if tree is empty, create first component at top-level
     if (data.length === 0) {
       data.push({
-        title: newName,
+        title: formattedName,
         expanded: true,
         children: []
       })
@@ -106,7 +117,7 @@ class App extends Component {
         let title = data[i].title
         if (title === target) {
           data[i].children.push({
-            title: newName,
+            title: formattedName,
             expanded: true,
             children: []
           })
