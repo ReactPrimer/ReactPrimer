@@ -5,8 +5,6 @@ class NewCompForm extends Component {
 
   render() {
     const {
-      newName,
-      newParent,
       extractCompNames,
       handleInputChange,
       handleSelectChange,
@@ -31,7 +29,6 @@ class NewCompForm extends Component {
           <input
             type='text'
             name='name'
-            value={newName}
             onChange={handleInputChange}
             />
           <br />
@@ -39,7 +36,6 @@ class NewCompForm extends Component {
           <br />
           <select
             name='parent'
-            value={newParent}
             onChange={handleSelectChange}
             >
             <option />

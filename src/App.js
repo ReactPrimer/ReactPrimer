@@ -65,6 +65,12 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.exportFiles = this.exportFiles.bind(this);
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+      const vitalStateChange = this.state.treeData !== nextState.treeData;
+      return vitalStateChange;
+  }
+
   // Helper function creates an array of all component names
   extractCompNames(components, flattened = []) {
     const cache = {};
@@ -144,7 +150,7 @@ class App extends Component {
     }
     this.setState({ newName: '' })
   }
-  
+
 
 //function for sending data to Electron server
 exportFiles() {
@@ -152,6 +158,8 @@ exportFiles() {
 }
 
 render() {
+  console.log("Page rendered.")
+
   // Nodekey used to identify node to be removed.
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
