@@ -6,8 +6,8 @@ function fileContent(component) {
   content += "import React, { Component } from 'react';\n";
 
   for (let i = 0; i < component.children.length; i++) {
-    if (!cache[component.children[i]]) {
-      cache[component.children[i]] = true;
+    if (!cache[component.children[i].title]) {
+      cache[component.children[i].title] = true;
       content += `import ${component.children[i].title} from './${component.children[i].title}.jsx'\n`;
     }
   }
