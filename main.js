@@ -13,7 +13,7 @@ const fs = require('fs');
 const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
-require('electron-reload')(__dirname);
+// require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -44,16 +44,16 @@ function createWindow() {
       buttonLabel: 'Save'
     }, fileDir => {
       let projDir = fileDir + '/components';
-      fs.mkdir(projDir, err=> {
+      fs.mkdir(projDir, err => {
         if (err) {
           dialog.showErrorBox('Duplicate Folder Error', 'A component folder already exists in selected directory')
         }
         else {
           //dialog.showMessageBox({message:'component folder has been exported',buttons: ['confirm']})
-        for (let k = 0; k < flattenComps.length; k++) {
-          fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]));
+          for (let k = 0; k < flattenComps.length; k++) {
+            fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]));
           };
-        event.sender.send('fileSuccess',412)
+          event.sender.send('fileSuccess', 412)
         }
       });
     })
