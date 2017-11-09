@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import SortableTree, { removeNodeAtPath } from 'react-sortable-tree';
 import NewCompForm from './NewCompForm';
 
-
 const IPC = require('electron').ipcRenderer;
 
 
