@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SortableTree, { removeNodeAtPath } from 'react-sortable-tree';
 import NewCompForm from './NewCompForm';
-
+import './App.css'
 const IPC = require('electron').ipcRenderer;
 
 
@@ -163,8 +163,10 @@ render() {
   const getNodeKey = ({ treeIndex }) => treeIndex;
 
   return (
-    <div>
-      <h1>ReactPrimer</h1>
+
+      <div className = "flex-container">
+      <div className='inputBox'>
+        <h1 id="RP">ReactPrimer</h1>
       <NewCompForm
         newName={this.state.newName}
         newParent={this.state.newParent}
@@ -178,7 +180,8 @@ render() {
       <button onClick={this.exportFiles}>Export Components</button>
       <br />
       <br />
-      <div style={{ height: 525 }}>
+    </div>
+      <div className = "tree">
         <SortableTree
           treeData={this.state.treeData}
           onChange={treeData => this.setState({ treeData })}
