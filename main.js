@@ -19,7 +19,12 @@ const flattenComponent = require('./flattenComponent.js');
 let mainWindow
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 800, height: 600 })
+  mainWindow = new BrowserWindow({ 
+    // titleBarStyle: 'hidden',
+    width: 720, 
+    height: 420, 
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
+  })
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
@@ -28,7 +33,10 @@ function createWindow() {
   }))
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
+
+
+
 
   /* - the IPC listens for component info to be received from the front end.
      - openDialog lets user to select where exported file folder will be generated.
@@ -59,6 +67,9 @@ function createWindow() {
     })
   })
 
+  // As we are in windows, escape the slash with another
+  // const configValues = require('./config');
+  // BrowserWindow.addDevToolsExtension(configValues.absolutePath);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -67,10 +78,6 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null
   })
-
-  // As we are in windows, escape the slash with another
-  const configValues = require('./config');
-  BrowserWindow.addDevToolsExtension(configValues.absolutePath);
 
 }
 
