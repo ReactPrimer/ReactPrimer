@@ -5,7 +5,6 @@ import NewCompForm from './NewCompForm';
 
 const IPC = require('electron').ipcRenderer;
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +53,7 @@ class App extends Component {
         ]
       }],
       newName: '',
-      newParent: ''
+      newParent: '-'
     };
     this.extractCompNames = this.extractCompNames.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -71,15 +70,15 @@ class App extends Component {
   }
 
   // Helper function creates an array of all component names
-  extractCompNames(components, flattened = []) {
-    const cache = {};
+  extractCompNames(components, flattened = [], cache = {}) {
     components.forEach((element, index) => {
-      let obj = {};
-      if (!cache[element.title]) {
-        cache[element.title] = true;
-        obj['title'] = element.title;
-        flattened.push(obj);
-        this.extractCompNames(components[index].children, flattened);
+      // console.log('LOOP:', index)
+      let name = element.title.toUpperCase()
+      if (!cache[name]) {
+        cache[name] = true;
+        // console.log('cache: ', cache, 'title: ', element.title)
+        flattened.push(element.title);
+        this.extractCompNames(components[index].children, flattened, cache);
       }
     })
     return flattened;
@@ -129,12 +128,13 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault()
     const newName = this.state.newName
+    const newParent = this.state.newParent
     const target = this.state.newParent;
     const tree = this.state.treeData.slice();
     if (newName === '') {
       alert('Please enter a component name.')
     }
-    else if (tree.length === 0) {
+    else if (newParent === '-' || tree.length === 0) {
       console.log('tree: ', tree);
       tree.push({
         title: this.formatName(newName),

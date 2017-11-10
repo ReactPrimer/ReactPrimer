@@ -15,13 +15,14 @@ class NewCompForm extends Component {
     // Creates an option element in dropdown menu for each component name in state.
     const componentNames = extractCompNames(components)
     const parents = componentNames.map((parent, index) => {
-      return <option key={index} value={parent.title}>
-        {parent.title}
+      return <option key={index} value={parent}>
+        {parent}
       </option>
     })
 
     return (
       <div>
+      <p>Link vs LINK - Should these be different components?</p>
         <fieldset>
           <legend>Create a new component</legend>
           <form>
@@ -38,7 +39,7 @@ class NewCompForm extends Component {
             name='parent'
             onChange={handleSelectChange}
             >
-            <option />
+            <option value='-'>-</option>
             {parents}
           </select>
           <br />
