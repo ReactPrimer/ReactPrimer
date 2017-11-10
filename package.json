@@ -6,22 +6,23 @@
   "main": "main.js",
   "scripts": {
     "dev": "webpack",
-    "start": "electron ."
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/png/128x128.png --prune=true --out=release-builds"
   },
   "repository": "https://github.com/ReactPrimer/ReactPrimer",
   "author": "KVK",
   "license": "CC0-1.0",
   "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-react": "^6.23.0",
+    "css-loader": "^0.26.1",
     "electron": "~1.7.8",
     "electron-builder": "^19.45.4",
     "electron-installer-dmg": "^0.2.1",
     "electron-packager": "^9.1.0",
     "electron-prebuilt-compile": "^1.7.9",
     "electron-reload": "^1.2.2",
-    "babel-core": "^6.23.1",
-    "babel-loader": "^7.1.2",
-    "babel-preset-react": "^6.23.0",
-    "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.9.0",
     "webpack": "^2.2.1"
