@@ -20,10 +20,11 @@ let mainWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({ 
-    titleBarStyle: 'hidden',
+    // titleBarStyle: 'hidden',
     width: 720, 
     height: 420,
     minWidth: 645, 
+    minHeight: 360,
     icon: path.join(__dirname, './assets/icons/png/128x128.png')
   })
 
@@ -34,7 +35,7 @@ function createWindow() {
   }))
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
 
 
@@ -58,7 +59,7 @@ function createWindow() {
           dialog.showErrorBox('Duplicate Folder Error', 'A component folder already exists in selected directory')
         }
         else {
-          //dialog.showMessageBox({message:'component folder has been exported',buttons: ['confirm']})
+          dialog.showMessageBox({message:'Component folder has been exported.',buttons: ['OK']})
           for (let k = 0; k < flattenComps.length; k++) {
             fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]));
           };
@@ -69,8 +70,8 @@ function createWindow() {
   })
 
   // As we are in windows, escape the slash with another
-  const configValues = require('./config');
-  BrowserWindow.addDevToolsExtension(configValues.absolutePath);
+  // const configValues = require('./config');
+  // BrowserWindow.addDevToolsExtension(configValues.absolutePath);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
