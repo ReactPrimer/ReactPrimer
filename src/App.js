@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SortableTree, { removeNodeAtPath } from 'react-sortable-tree';
 import NewCompForm from './NewCompForm';
-
+import './App.css'
 const IPC = require('electron').ipcRenderer;
 
 class App extends Component {
@@ -12,45 +12,7 @@ class App extends Component {
       treeData: [{
         title: 'App',
         expanded: true,
-        children: [
-          {
-            title: 'Navigation',
-            expanded: true,
-            children: [
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              }
-            ]
-          },
-          {
-            title: 'SideBar',
-            expanded: true,
-            children: []
-          },
-          {
-            title: 'Products',
-            expanded: true,
-            children: [
-              {
-                title: 'Product',
-                expanded: true,
-                children: []
-              }
-            ]
-          }
-        ]
+        children: []
       }],
       newName: '',
       newParent: '-'
@@ -149,57 +111,57 @@ class App extends Component {
     this.setState({ newName: '' })
   }
 
+  //function for sending data to Electron server
+  exportFiles() {
+    IPC.send('componentTree', this.state.treeData);
+  }
 
-//function for sending data to Electron server
-exportFiles() {
-  IPC.send('componentTree', this.state.treeData);
-}
+  render() {
+    // Nodekey used to identify node to be removed.
+    const getNodeKey = ({ treeIndex }) => treeIndex;
 
-render() {
-  console.log("Page rendered.")
+    return (
 
-  // Nodekey used to identify node to be removed.
-  const getNodeKey = ({ treeIndex }) => treeIndex;
+      <div className="flex-container">
+        <div className='inputBox'>
+          <h1 id="RP"></h1>
+          <NewCompForm
+            newName={this.state.newName}
+            newParent={this.state.newParent}
+            extractCompNames={this.extractCompNames}
+            handleInputChange={this.handleInputChange}
+            handleSelectChange={this.handleSelectChange}
+            handleSubmit={this.handleSubmit}
+            components={this.state.treeData}
+            exportFiles={this.exportFiles}
+          />
+          <br />
 
-  return (
-    <div>
-      <h1>ReactPrimer</h1>
-      <NewCompForm
-        newName={this.state.newName}
-        newParent={this.state.newParent}
-        extractCompNames={this.extractCompNames}
-        handleInputChange={this.handleInputChange}
-        handleSelectChange={this.handleSelectChange}
-        handleSubmit={this.handleSubmit}
-        components={this.state.treeData}
-      />
-      <br />
-      <button onClick={this.exportFiles}>Export Components</button>
-      <br />
-      <br />
-      <div style={{ height: 525 }}>
-        <SortableTree
-          treeData={this.state.treeData}
-          onChange={treeData => this.setState({ treeData })}
-          // button for removing component
-          generateNodeProps={({ node, path }) => ({
-            buttons: [
-              <button onClick={() => this.setState(state => ({
-                treeData: removeNodeAtPath({
-                  treeData:
-                  state.treeData,
-                  path,
-                  getNodeKey,
-                }),
-              }))}
-              >X</button>,
-            ],
-          })}
-        />
+
+        </div>
+        <div className="tree">
+          <SortableTree
+            treeData={this.state.treeData}
+            onChange={treeData => this.setState({ treeData })}
+            // button for removing component
+            generateNodeProps={({ node, path }) => ({
+              buttons: [
+                <button className="deleteButton" onClick={() => this.setState(state => ({
+                  treeData: removeNodeAtPath({
+                    treeData:
+                      state.treeData,
+                    path,
+                    getNodeKey,
+                  }),
+                }))}
+                >X</button>,
+              ],
+            })}
+          />
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 }
 
 export default App;
