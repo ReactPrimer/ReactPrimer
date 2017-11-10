@@ -20,10 +20,11 @@ let mainWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({ 
-    // titleBarStyle: 'hidden',
+    titleBarStyle: 'hidden',
     width: 720, 
-    height: 420, 
-    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
+    height: 420,
+    minWidth: 645, 
+    icon: path.join(__dirname, './assets/icons/png/128x128.png')
   })
 
   mainWindow.loadURL(url.format({
@@ -33,7 +34,7 @@ function createWindow() {
   }))
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
 
 
@@ -68,8 +69,8 @@ function createWindow() {
   })
 
   // As we are in windows, escape the slash with another
-  // const configValues = require('./config');
-  // BrowserWindow.addDevToolsExtension(configValues.absolutePath);
+  const configValues = require('./config');
+  BrowserWindow.addDevToolsExtension(configValues.absolutePath);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
