@@ -1,13 +1,14 @@
 {
   "name": "React-Primer",
-  "productName": "React Primer",
+  "productName": "ReactPrimer",
   "version": "1.0.0",
   "description": "Production Project",
   "main": "main.js",
   "scripts": {
     "dev": "webpack",
     "start": "electron .",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/png/128x128.png --prune=true --out=release-builds"
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "installer-mac": "electron-installer-dmg ./release-builds/ReactPrimer-darwin-x64/ReactPrimer.app ReactPrimer"
   },
   "repository": "https://github.com/ReactPrimer/ReactPrimer",
   "author": "KVK",

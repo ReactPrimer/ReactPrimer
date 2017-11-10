@@ -4,3 +4,4 @@ package-lock.json
 build
 releases
 .DS_Store
+release-builds
