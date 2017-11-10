@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import SortableTree, { removeNodeAtPath } from 'react-sortable-tree';
 import NewCompForm from './NewCompForm';
 
-
 const IPC = require('electron').ipcRenderer;
-
 
 class App extends Component {
   constructor(props) {
@@ -15,47 +13,47 @@ class App extends Component {
         title: 'App',
         expanded: true,
         children: [
-          // {
-          //   title: 'Navigation',
-          //   expanded: true,
-          //   children: [
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     },
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     },
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     }
-          //   ]
-          // },
-          // {
-          //   title: 'SideBar',
-          //   expanded: true,
-          //   children: []
-          // },
-          // {
-          //   title: 'Products',
-          //   expanded: true,
-          //   children: [
-          //     {
-          //       title: 'Product',
-          //       expanded: true,
-          //       children: []
-          //     }
-          //   ]
-          // }
+          {
+            title: 'Navigation',
+            expanded: true,
+            children: [
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              },
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              },
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              }
+            ]
+          },
+          {
+            title: 'SideBar',
+            expanded: true,
+            children: []
+          },
+          {
+            title: 'Products',
+            expanded: true,
+            children: [
+              {
+                title: 'Product',
+                expanded: true,
+                children: []
+              }
+            ]
+          }
         ]
       }],
       newName: '',
-      newParent: ''
+      newParent: '-'
     };
     this.extractCompNames = this.extractCompNames.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -65,16 +63,22 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.exportFiles = this.exportFiles.bind(this);
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //     const vitalStateChange = this.state.treeData !== nextState.treeData;
+  //     return vitalStateChange;
+  // }
+
   // Helper function creates an array of all component names
-  extractCompNames(components, flattened = []) {
-    const cache = {};
+  extractCompNames(components, flattened = [], cache = {}) {
     components.forEach((element, index) => {
-      let obj = {};
-      if (!cache[element.title]) {
-        cache[element.title] = true;
-        obj['title'] = element.title;
-        flattened.push(obj);
-        this.extractCompNames(components[index].children, flattened);
+      let name = 
+        element.title
+        // .toUpperCase()
+      if (!cache[name]) {
+        cache[name] = true;
+        flattened.push(element.title);
+        this.extractCompNames(components[index].children, flattened, cache);
       }
     })
     return flattened;
@@ -104,27 +108,18 @@ class App extends Component {
   searchTreeData(data, target, newName) {
     let formattedName = this.formatName(newName)
     // if tree is empty, create first component at top-level
-    if (data.length === 0) {
-      data.push({
-        title: formattedName,
-        expanded: true,
-        children: []
-      })
-    }
-    else {
-      for (let i = 0; i < data.length; i += 1) {
-        // console.log('i: ', i, '; data: ', data[i]);
-        let title = data[i].title
-        if (title === target) {
-          data[i].children.push({
-            title: formattedName,
-            expanded: true,
-            children: []
-          })
-        }
-        if (data[i].children) {
-          this.searchTreeData(data[i].children, target, newName);
-        }
+    for (let i = 0; i < data.length; i += 1) {
+      // console.log('i: ', i, '; data: ', data[i]);
+      let title = data[i].title
+      if (title === target) {
+        data[i].children.push({
+          title: formattedName,
+          expanded: true,
+          children: []
+        })
+      }
+      if (data[i].children) {
+        this.searchTreeData(data[i].children, target, newName);
       }
     };
   }
@@ -133,10 +128,19 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault()
     const newName = this.state.newName
+    const newParent = this.state.newParent
     const target = this.state.newParent;
     const tree = this.state.treeData.slice();
     if (newName === '') {
       alert('Please enter a component name.')
+    }
+    else if (newParent === '-' || tree.length === 0) {
+      tree.push({
+        title: this.formatName(newName),
+        expanded: true,
+        children: []
+      })
+      this.setState({ treeData: tree })
     }
     else {
       this.searchTreeData(tree, target, newName)
@@ -145,54 +149,57 @@ class App extends Component {
     this.setState({ newName: '' })
   }
 
-  //function for sending data to Electron server
-  exportFiles() {
-    IPC.send('componentTree', this.state.treeData);
-  }
 
-  render() {
-    // Nodekey used to identify node to be removed.
-    const getNodeKey = ({ treeIndex }) => treeIndex;
+//function for sending data to Electron server
+exportFiles() {
+  IPC.send('componentTree', this.state.treeData);
+}
 
-    return (
-      <div>
-        <h1>ReactPrimer</h1>
-        <NewCompForm
-          newName={this.state.newName}
-          newParent={this.state.newParent}
-          extractCompNames={this.extractCompNames}
-          handleInputChange={this.handleInputChange}
-          handleSelectChange={this.handleSelectChange}
-          handleSubmit={this.handleSubmit}
-          components={this.state.treeData}
+render() {
+  console.log("Page rendered.")
+
+  // Nodekey used to identify node to be removed.
+  const getNodeKey = ({ treeIndex }) => treeIndex;
+
+  return (
+    <div>
+      <h1>ReactPrimer</h1>
+      <NewCompForm
+        newName={this.state.newName}
+        newParent={this.state.newParent}
+        extractCompNames={this.extractCompNames}
+        handleInputChange={this.handleInputChange}
+        handleSelectChange={this.handleSelectChange}
+        handleSubmit={this.handleSubmit}
+        components={this.state.treeData}
+      />
+      <br />
+      <button onClick={this.exportFiles}>Export Components</button>
+      <br />
+      <br />
+      <div style={{ height: 525 }}>
+        <SortableTree
+          treeData={this.state.treeData}
+          onChange={treeData => this.setState({ treeData })}
+          // button for removing component
+          generateNodeProps={({ node, path }) => ({
+            buttons: [
+              <button onClick={() => this.setState(state => ({
+                treeData: removeNodeAtPath({
+                  treeData:
+                  state.treeData,
+                  path,
+                  getNodeKey,
+                }),
+              }))}
+              >X</button>,
+            ],
+          })}
         />
-        <br />
-        <button onClick={this.exportFiles}>Export Components</button>
-        <br />
-        <br />
-        <div style={{ height: 525 }}>
-          <SortableTree
-            treeData={this.state.treeData}
-            onChange={treeData => this.setState({ treeData })}
-            // button for removing component
-            generateNodeProps={({ node, path }) => ({
-              buttons: [
-                <button onClick={() => this.setState(state => ({
-                  treeData: removeNodeAtPath({
-                    treeData:
-                    state.treeData,
-                    path,
-                    getNodeKey,
-                  }),
-                }))}
-                >X</button>,
-              ],
-            })}
-          />
-        </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 }
 
 export default App;

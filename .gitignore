@@ -1,3 +1,5 @@
 node_modules
 config.json
 package-lock.json
+build
+releases

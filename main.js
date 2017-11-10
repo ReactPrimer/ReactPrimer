@@ -13,7 +13,7 @@ const fs = require('fs');
 const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
-require('electron-reload')(__dirname);
+// require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -38,23 +38,27 @@ function createWindow() {
   */
   IPC.on('componentTree', (event, components) => {
     let flattenComps = flattenComponent(components);
-    console.log('flattenComps: ->', flattenComps);
     dialog.showOpenDialog({
       title: 'please select where to export',
       properties: ['openDirectory'],
       buttonLabel: 'Save'
     }, fileDir => {
       let projDir = fileDir + '/components';
-      fs.mkdirSync(projDir);
-      for (let k = 0; k < flattenComps.length; k++) {
-        console.log('flattenComps[k]: ', flattenComps[k]);
-        fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]), (err) => {
-          if (err) console.log('File i/o error ', err);
-          return;
-        });
-      }
+      fs.mkdir(projDir, err => {
+        if (err) {
+          dialog.showErrorBox('Duplicate Folder Error', 'A component folder already exists in selected directory')
+        }
+        else {
+          //dialog.showMessageBox({message:'component folder has been exported',buttons: ['confirm']})
+          for (let k = 0; k < flattenComps.length; k++) {
+            fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]));
+          };
+          event.sender.send('fileSuccess', 412)
+        }
+      });
     })
-  });
+  })
+
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
