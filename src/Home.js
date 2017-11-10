@@ -6,7 +6,7 @@ import NewCompForm from './NewCompForm';
 const IPC = require('electron').ipcRenderer;
 
 
-class App extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -143,56 +143,56 @@ class App extends Component {
     }
     this.setState({ newName: '' })
   }
-  
 
-//function for sending data to Electron server
-exportFiles() {
-  IPC.send('componentTree', this.state.treeData);
-}
 
-render() {
-  // Nodekey used to identify node to be removed.
-  const getNodeKey = ({ treeIndex }) => treeIndex;
+  //function for sending data to Electron server
+  exportFiles() {
+    IPC.send('componentTree', this.state.treeData);
+  }
 
-  return (
-    <div>
-      <h1>ReactPrimer</h1>
-      <NewCompForm
-        newName={this.state.newName}
-        newParent={this.state.newParent}
-        extractCompNames={this.extractCompNames}
-        handleInputChange={this.handleInputChange}
-        handleSelectChange={this.handleSelectChange}
-        handleSubmit={this.handleSubmit}
-        components={this.state.treeData}
-      />
-      <br />
-      <button onClick={this.exportFiles}>Export Components</button>
-      <br />
-      <br />
-      <div style={{ height: 525 }}>
-        <SortableTree
-          treeData={this.state.treeData}
-          onChange={treeData => this.setState({ treeData })}
-          // button for removing component
-          generateNodeProps={({ node, path }) => ({
-            buttons: [
-              <button onClick={() => this.setState(state => ({
-                treeData: removeNodeAtPath({
-                  treeData:
-                  state.treeData,
-                  path,
-                  getNodeKey,
-                }),
-              }))}
-              >X</button>,
-            ],
-          })}
+  render() {
+    // Nodekey used to identify node to be removed.
+    const getNodeKey = ({ treeIndex }) => treeIndex;
+
+    return (
+      <div>
+        <h1>ReactPrimer</h1>
+        <NewCompForm
+          newName={this.state.newName}
+          newParent={this.state.newParent}
+          extractCompNames={this.extractCompNames}
+          handleInputChange={this.handleInputChange}
+          handleSelectChange={this.handleSelectChange}
+          handleSubmit={this.handleSubmit}
+          components={this.state.treeData}
         />
+        <br />
+        <button onClick={this.exportFiles}>Export Components</button>
+        <br />
+        <br />
+        <div style={{ height: 525 }}>
+          <SortableTree
+            treeData={this.state.treeData}
+            onChange={treeData => this.setState({ treeData })}
+            // button for removing component
+            generateNodeProps={({ node, path }) => ({
+              buttons: [
+                <button onClick={() => this.setState(state => ({
+                  treeData: removeNodeAtPath({
+                    treeData:
+                    state.treeData,
+                    path,
+                    getNodeKey,
+                  }),
+                }))}
+                >X</button>,
+              ],
+            })}
+          />
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 }
 
-export default App;
+export default Home;
