@@ -5,6 +5,7 @@ class NewCompForm extends Component {
 
   render() {
     const {
+      newName,
       extractCompNames,
       handleInputChange,
       handleSelectChange,
@@ -22,14 +23,12 @@ class NewCompForm extends Component {
 
     return (
       <div>
-      <p>Link vs LINK - Should these be different components?</p>
-        <fieldset>
-          <legend>Create a new component</legend>
           <form>
             Name:<br />
           <input
             type='text'
             name='name'
+            value={newName}
             onChange={handleInputChange}
             />
           <br />
@@ -50,7 +49,6 @@ class NewCompForm extends Component {
             onClick={handleSubmit}
             />
         </form>
-      </fieldset>
     </div>
   );
 }

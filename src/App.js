@@ -13,43 +13,43 @@ class App extends Component {
         title: 'App',
         expanded: true,
         children: [
-          // {
-          //   title: 'Navigation',
-          //   expanded: true,
-          //   children: [
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     },
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     },
-          //     {
-          //       title: 'Link',
-          //       expanded: true,
-          //       children: []
-          //     }
-          //   ]
-          // },
-          // {
-          //   title: 'SideBar',
-          //   expanded: true,
-          //   children: []
-          // },
-          // {
-          //   title: 'Products',
-          //   expanded: true,
-          //   children: [
-          //     {
-          //       title: 'Product',
-          //       expanded: true,
-          //       children: []
-          //     }
-          //   ]
-          // }
+          {
+            title: 'Navigation',
+            expanded: true,
+            children: [
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              },
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              },
+              {
+                title: 'Link',
+                expanded: true,
+                children: []
+              }
+            ]
+          },
+          {
+            title: 'SideBar',
+            expanded: true,
+            children: []
+          },
+          {
+            title: 'Products',
+            expanded: true,
+            children: [
+              {
+                title: 'Product',
+                expanded: true,
+                children: []
+              }
+            ]
+          }
         ]
       }],
       newName: '',
@@ -64,19 +64,19 @@ class App extends Component {
     this.exportFiles = this.exportFiles.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-      const vitalStateChange = this.state.treeData !== nextState.treeData;
-      return vitalStateChange;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //     const vitalStateChange = this.state.treeData !== nextState.treeData;
+  //     return vitalStateChange;
+  // }
 
   // Helper function creates an array of all component names
   extractCompNames(components, flattened = [], cache = {}) {
     components.forEach((element, index) => {
-      // console.log('LOOP:', index)
-      let name = element.title.toUpperCase()
+      let name = 
+        element.title
+        // .toUpperCase()
       if (!cache[name]) {
         cache[name] = true;
-        // console.log('cache: ', cache, 'title: ', element.title)
         flattened.push(element.title);
         this.extractCompNames(components[index].children, flattened, cache);
       }
@@ -131,7 +131,6 @@ class App extends Component {
     const newParent = this.state.newParent
     const target = this.state.newParent;
     const tree = this.state.treeData.slice();
-    console.log(e)
     if (newName === '') {
       alert('Please enter a component name.')
     }
