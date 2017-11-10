@@ -13,43 +13,43 @@ class App extends Component {
         title: 'App',
         expanded: true,
         children: [
-          {
-            title: 'Navigation',
-            expanded: true,
-            children: [
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              }
-            ]
-          },
-          {
-            title: 'SideBar',
-            expanded: true,
-            children: []
-          },
-          {
-            title: 'Products',
-            expanded: true,
-            children: [
-              {
-                title: 'Product',
-                expanded: true,
-                children: []
-              }
-            ]
-          }
+          // {
+          //   title: 'Navigation',
+          //   expanded: true,
+          //   children: [
+          //     {
+          //       title: 'Link',
+          //       expanded: true,
+          //       children: []
+          //     },
+          //     {
+          //       title: 'Link',
+          //       expanded: true,
+          //       children: []
+          //     },
+          //     {
+          //       title: 'Link',
+          //       expanded: true,
+          //       children: []
+          //     }
+          //   ]
+          // },
+          // {
+          //   title: 'SideBar',
+          //   expanded: true,
+          //   children: []
+          // },
+          // {
+          //   title: 'Products',
+          //   expanded: true,
+          //   children: [
+          //     {
+          //       title: 'Product',
+          //       expanded: true,
+          //       children: []
+          //     }
+          //   ]
+          // }
         ]
       }],
       newName: '',
@@ -131,11 +131,11 @@ class App extends Component {
     const newParent = this.state.newParent
     const target = this.state.newParent;
     const tree = this.state.treeData.slice();
+    console.log(e)
     if (newName === '') {
       alert('Please enter a component name.')
     }
     else if (newParent === '-' || tree.length === 0) {
-      console.log('tree: ', tree);
       tree.push({
         title: this.formatName(newName),
         expanded: true,
