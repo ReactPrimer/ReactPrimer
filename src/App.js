@@ -5,7 +5,6 @@ import NewCompForm from './NewCompForm';
 import './App.css'
 const IPC = require('electron').ipcRenderer;
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,48 +12,10 @@ class App extends Component {
       treeData: [{
         title: 'App',
         expanded: true,
-        children: [
-          {
-            title: 'Navigation',
-            expanded: true,
-            children: [
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              },
-              {
-                title: 'Link',
-                expanded: true,
-                children: []
-              }
-            ]
-          },
-          {
-            title: 'SideBar',
-            expanded: true,
-            children: []
-          },
-          {
-            title: 'Products',
-            expanded: true,
-            children: [
-              {
-                title: 'Product',
-                expanded: true,
-                children: []
-              }
-            ]
-          }
-        ]
+        children: []
       }],
       newName: '',
-      newParent: ''
+      newParent: '-'
     };
     this.extractCompNames = this.extractCompNames.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -65,21 +26,21 @@ class App extends Component {
     this.exportFiles = this.exportFiles.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-      const vitalStateChange = this.state.treeData !== nextState.treeData;
-      return vitalStateChange;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //     const vitalStateChange = this.state.treeData !== nextState.treeData;
+  //     return vitalStateChange;
+  // }
 
   // Helper function creates an array of all component names
-  extractCompNames(components, flattened = []) {
-    const cache = {};
+  extractCompNames(components, flattened = [], cache = {}) {
     components.forEach((element, index) => {
-      let obj = {};
-      if (!cache[element.title]) {
-        cache[element.title] = true;
-        obj['title'] = element.title;
-        flattened.push(obj);
-        this.extractCompNames(components[index].children, flattened);
+      let name = 
+        element.title
+        // .toUpperCase()
+      if (!cache[name]) {
+        cache[name] = true;
+        flattened.push(element.title);
+        this.extractCompNames(components[index].children, flattened, cache);
       }
     })
     return flattened;
@@ -129,13 +90,13 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault()
     const newName = this.state.newName
+    const newParent = this.state.newParent
     const target = this.state.newParent;
     const tree = this.state.treeData.slice();
     if (newName === '') {
       alert('Please enter a component name.')
     }
-    else if (tree.length === 0) {
-      console.log('tree: ', tree);
+    else if (newParent === '-' || tree.length === 0) {
       tree.push({
         title: this.formatName(newName),
         expanded: true,
@@ -150,60 +111,57 @@ class App extends Component {
     this.setState({ newName: '' })
   }
 
+  //function for sending data to Electron server
+  exportFiles() {
+    IPC.send('componentTree', this.state.treeData);
+  }
 
-//function for sending data to Electron server
-exportFiles() {
-  IPC.send('componentTree', this.state.treeData);
-}
+  render() {
+    // Nodekey used to identify node to be removed.
+    const getNodeKey = ({ treeIndex }) => treeIndex;
 
-render() {
-  console.log("Page rendered.")
+    return (
 
-  // Nodekey used to identify node to be removed.
-  const getNodeKey = ({ treeIndex }) => treeIndex;
+      <div className="flex-container">
+        <div className='inputBox'>
+          <h1 id="RP"></h1>
+          <NewCompForm
+            newName={this.state.newName}
+            newParent={this.state.newParent}
+            extractCompNames={this.extractCompNames}
+            handleInputChange={this.handleInputChange}
+            handleSelectChange={this.handleSelectChange}
+            handleSubmit={this.handleSubmit}
+            components={this.state.treeData}
+            exportFiles={this.exportFiles}
+          />
+          <br />
 
-  return (
 
-      <div className = "flex-container">
-      <div className='inputBox'>
-        <h1 id="RP">ReactPrimer</h1>
-      <NewCompForm
-        newName={this.state.newName}
-        newParent={this.state.newParent}
-        extractCompNames={this.extractCompNames}
-        handleInputChange={this.handleInputChange}
-        handleSelectChange={this.handleSelectChange}
-        handleSubmit={this.handleSubmit}
-        components={this.state.treeData}
-      />
-      <br />
-      <button onClick={this.exportFiles}>Export Components</button>
-      <br />
-      <br />
-    </div>
-      <div className = "tree">
-        <SortableTree
-          treeData={this.state.treeData}
-          onChange={treeData => this.setState({ treeData })}
-          // button for removing component
-          generateNodeProps={({ node, path }) => ({
-            buttons: [
-              <button onClick={() => this.setState(state => ({
-                treeData: removeNodeAtPath({
-                  treeData:
-                  state.treeData,
-                  path,
-                  getNodeKey,
-                }),
-              }))}
-              >X</button>,
-            ],
-          })}
-        />
+        </div>
+        <div className="tree">
+          <SortableTree
+            treeData={this.state.treeData}
+            onChange={treeData => this.setState({ treeData })}
+            // button for removing component
+            generateNodeProps={({ node, path }) => ({
+              buttons: [
+                <button className="deleteButton" onClick={() => this.setState(state => ({
+                  treeData: removeNodeAtPath({
+                    treeData:
+                      state.treeData,
+                    path,
+                    getNodeKey,
+                  }),
+                }))}
+                >X</button>,
+              ],
+            })}
+          />
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 }
 
 export default App;
