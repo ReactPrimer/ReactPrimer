@@ -2,8 +2,7 @@ body {
   font-family: 'Nunito Sans', sans-serif;
   margin: 0px;
   overflow-x: hidden;
-  /* -ms-overflow-style: scrollbar;
-  -webkit-animation:drag; */
+  -webkit-app-region: drag;
 }
 
 #RP {
@@ -37,6 +36,7 @@ background-color:white;
   /*border: 2px solid black;*/
 flex: 3;
 color:#4C5259;  
+-webkit-app-region: no-drag;
 }
 
 h1 {
@@ -52,7 +52,9 @@ h1 {
   flex-direction: column;
   margin: 1em; 
   color:#D9D9D9;
+  -webkit-app-region: no-drag;
 }
+
 
 .export {
   background-color: lightgreen;
@@ -64,4 +66,5 @@ h1 {
   background:none;
   border:none;
   font-weight:bold;
+  cursor: pointer;
 }
