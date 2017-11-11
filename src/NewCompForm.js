@@ -5,7 +5,6 @@ class NewCompForm extends Component {
   render() {
     const {
       newName,
-      newParent,
       extractCompNames,
       handleInputChange,
       handleSelectChange,
@@ -17,8 +16,8 @@ class NewCompForm extends Component {
     // Creates an option element in dropdown menu for each component name in state.
     const componentNames = extractCompNames(components)
     const parents = componentNames.map((parent, index) => {
-      return <option key={index} value={parent.title}>
-        {parent.title}
+      return <option key={index} value={parent}>
+        {parent}
       </option>
     })
 
@@ -30,6 +29,7 @@ class NewCompForm extends Component {
           Name
         <input
             placeholder="Component Name"
+
             type='text'
             name='name'
             value={newName}
@@ -39,10 +39,9 @@ class NewCompForm extends Component {
           Parent
           <select
             name='parent'
-            value={newParent}
             onChange={handleSelectChange}
-          >
-            <option />
+            >
+            <option value='-'>-</option>
             {parents}
           </select>
           <br />
@@ -63,9 +62,10 @@ class NewCompForm extends Component {
 
           <button className="export" onClick={exportFiles}>Export </button>
         </form>
-      </div>
-    );
-  }
+    </div>
+  );
+}
+
 }
 
 export default NewCompForm;
