@@ -112,7 +112,8 @@ class App extends Component {
   }
 
   //function for sending data to Electron server
-  exportFiles() {
+  exportFiles(e) {
+    e.preventDefault()
     IPC.send('componentTree', this.state.treeData);
   }
 
