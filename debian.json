@@ -1,0 +1,10 @@
+{
+  "dest": "release-builds/",
+  "icon": "assets/icons/png/128x128.png",
+  "categories": [
+    "Utility"
+  ],
+  "lintianOverrides": [
+    "changelog-file-missing-in-native-package"
+  ]
+}

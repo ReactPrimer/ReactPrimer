@@ -1,3 +1,10 @@
+//windows build requirement
+const setupEvents = require('./installers/setupEvents')
+if (setupEvents.handleSquirrelEvent()) {
+   // squirrel event handled and app will exit in 1000ms, so don't do anything else
+   return;
+}
+
 // required electron modules
 const electron = require('electron');
 const app = electron.app
@@ -19,11 +26,11 @@ const flattenComponent = require('./flattenComponent.js');
 let mainWindow
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ 
+  mainWindow = new BrowserWindow({
     // titleBarStyle: 'hidden',
-    width: 720, 
+    width: 720,
     height: 420,
-    minWidth: 645, 
+    minWidth: 645,
     minHeight: 360,
     icon: path.join(__dirname, './assets/icons/png/128x128.png')
   })
