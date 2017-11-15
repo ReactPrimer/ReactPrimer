@@ -20,14 +20,14 @@ const fs = require('fs');
 const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
-// require('electron-reload')(__dirname);
+require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    // titleBarStyle: 'hidden',
+    titleBarStyle: 'hidden',
     width: 720,
     height: 420,
     minWidth: 645,
@@ -42,8 +42,7 @@ function createWindow() {
   }))
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
-
+  mainWindow.webContents.openDevTools()
 
 
 
@@ -66,7 +65,7 @@ function createWindow() {
           dialog.showErrorBox('Duplicate Folder Error', 'A component folder already exists in selected directory')
         }
         else {
-          dialog.showMessageBox({message:'Component folder has been exported.',buttons: ['OK']})
+          dialog.showMessageBox({ message: 'Component folder has been exported.', buttons: ['OK'] })
           for (let k = 0; k < flattenComps.length; k++) {
             fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]));
           };
