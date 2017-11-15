@@ -5,6 +5,33 @@ body {
   -webkit-app-region: drag;
 }
 
+.rst__nodeContent {
+
+
+}
+.rst__moveHandle {
+  height: 1.6em !important;
+  width:1.6em;
+  /*background-color:white;*/
+  /*background-image:url("updownarr.jpg") !important;*/
+}
+.rst__rowContents {
+  height: 1.6em !important;
+}
+.rst__rowLabel {
+  margin: 0 auto;
+}
+.rst__rowToolbar {
+
+}
+.rst__row {
+
+}
+.rst__lineChildren::after {
+  height:30px !important;
+}
+
+
 #RP {
   font-family: arial;
   font-size: 1em;
@@ -35,7 +62,7 @@ margin-top: 2.2em;
 background-color:white;
   /*border: 2px solid black;*/
 flex: 3;
-color:#4C5259;  
+color:#4C5259;
 -webkit-app-region: no-drag;
 }
 
@@ -43,14 +70,14 @@ h1 {
   text-align: center;
   font-weight: 300;
   font-size:1em;
-  color:#D9D9D9;  
+  color:#D9D9D9;
 }
 
 .form {
   font-size: .8em;
   display: flex;
   flex-direction: column;
-  margin: 1em; 
+  margin: 1em;
   color:#D9D9D9;
   -webkit-app-region: no-drag;
 }
