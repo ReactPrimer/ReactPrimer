@@ -10,13 +10,13 @@ body {
 
 }
 .rst__moveHandle {
-  height: 1.6em !important;
+  height: 1.8em !important;
   width:1.6em;
   /*background-color:white;*/
   /*background-image:url("updownarr.jpg") !important;*/
 }
 .rst__rowContents {
-  height: 1.6em !important;
+  height: 1.8em !important;
 }
 .rst__rowLabel {
   margin: 0 auto;
@@ -24,9 +24,12 @@ body {
 .rst__rowToolbar {
 
 }
-.rst__row {
 
+.rst__rowCancelPad::before,.rst__rowLandingPad::before {
+    height:1.8em !important;
+    background-color:gray;
 }
+
 .rst__lineChildren::after {
   height:30px !important;
 }
