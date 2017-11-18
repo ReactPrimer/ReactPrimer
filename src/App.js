@@ -35,8 +35,8 @@ class App extends Component {
   extractCompNames(components, flattened = [], cache = {}) {
     components.forEach((element, index) => {
       let name =
-        element.title
-        // .toUpperCase()
+      element.title
+      // .toUpperCase()
       if (!cache[name]) {
         cache[name] = true;
         flattened.push(element.title);
@@ -59,10 +59,10 @@ class App extends Component {
   // Formats casing and spacing, and removes file extenions from input
   formatName(userInput) {
     let result = userInput
-      .replace(/^./g, x => x.toUpperCase())
-      //.charAt(0).toUpperCase() + userInput.slice(1)
-      .replace(/\ \w/g, x => x[1].toUpperCase())
-      .replace(/\..+$/, '');
+    .replace(/^./g, x => x.toUpperCase())
+    //.charAt(0).toUpperCase() + userInput.slice(1)
+    .replace(/\ \w/g, x => x[1].toUpperCase())
+    .replace(/\..+$/, '');
     return result
   }
 
@@ -122,7 +122,12 @@ class App extends Component {
     const getNodeKey = ({ treeIndex }) => treeIndex;
 
     return (
-      <div className="flex-container">
+      <div className='top-container'>
+        <div className='top-spacer'>
+          <div className='left-spacer'/>
+          <div className='right-spacer' />
+        </div>
+        <div className='container'>
           <NewCompForm
             newName={this.state.newName}
             newParent={this.state.newParent}
@@ -132,31 +137,32 @@ class App extends Component {
             handleSubmit={this.handleSubmit}
             components={this.state.treeData}
             exportFiles={this.exportFiles}
-          />
-        <div className='tree-container'>
-          <div className='top-spacer' />
-          <SortableTree
-            treeData={this.state.treeData}
-            onChange={treeData => this.setState({ treeData })}
-            // button for removing component
-            generateNodeProps={({ node, path }) => ({
-              buttons: [
-                <button className="deleteButton" onClick={() => this.setState(state => ({
-                  treeData: removeNodeAtPath({
-                    treeData:
-                      state.treeData,
-                    path,
-                    getNodeKey,
-                  }),
-                }))}
-                >X</button>,
-              ],
-            })}
-          />
+            />
+          <div className='tree-container'>
+            <SortableTree
+              className='sortable-tree'
+              treeData={this.state.treeData}
+              onChange={treeData => this.setState({ treeData })}
+              // button for removing component
+              generateNodeProps={({ node, path }) => ({
+                buttons: [
+                  <button className="deleteButton" onClick={() => this.setState(state => ({
+                      treeData: removeNodeAtPath({
+                        treeData:
+                        state.treeData,
+                        path,
+                        getNodeKey,
+                      }),
+                    }))}
+                    >X</button>,
+                  ],
+                })}
+                />
+            </div>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-}
 
-export default App;
+  export default App;

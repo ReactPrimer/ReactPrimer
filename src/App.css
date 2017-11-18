@@ -1,6 +1,11 @@
+html, head, #root {
+  height: 100%;
+}
+
 body {
   font-family: 'Nunito Sans', sans-serif;
-  margin: 0px;
+  margin: 0;
+  height: 100%;
   -webkit-app-region: drag;
 }
 
@@ -11,8 +16,6 @@ body {
 .rst__moveHandle {
   height: 1.8em !important;
   width:1.6em;
-  /*background-color:white;*/
-  /*background-image:url("updownarr.jpg") !important;*/
 }
 
 .rst__rowContents {
@@ -28,76 +31,108 @@ body {
 }
 
 .rst__rowCancelPad::before,.rst__rowLandingPad::before {
-    height:1.8em !important;
-    background-color:gray;
+  height:1.8em !important;
+  background-color:gray;
 }
 
 .rst__lineChildren::after {
   height:30px !important;
 }
 
-
-.flex-container {
-display: flex;
-flex-direction: row;
-flex-wrap:nowrap;
-justify-content: flex-start;
-height: 100vh;
-}
-
-.left-sidebar {
-background-color: #4C5259;
-align-items:center stretch;
-flex:1.3;
-height: 100vh;
+.top-container {
+  height: 100%;
 }
 
 .top-spacer {
-  font-family: arial;
-  font-size: 1em;
-  padding:1.4em;
-  margin-top:0px;
-  text-align: center;
+  display: flex;
+  height: 2.4em;
+}
+
+.left-spacer {
+  flex: 1.3;
   background-color: #6D7984;
-  -webkit-app-region: drag;
+}
+
+.right-spacer {
+  flex: 3;
+}
+
+.container {
+  display: flex;
+  height: calc(100% - 2.4em);
 }
 
 .tree-container {
-background-color:white;
-flex: 3;
-color:#4C5259;
+  height: 100%;
+  flex: 3;
+  align-self: flex-end;
+  background-color: white;
+  color: #4C5259;
+}
 
+.sortable-tree {
+  -webkit-app-region: no-drag;
+}
+
+.form-container {
+  height: 100%;
+  flex: 1.3;
+  align-self: flex-end;
+  display: grid;
+  grid-template-rows: 1%;
+  background-color: #4C5259;
 }
 
 h1 {
+  grid-row-start: 1;
+  grid-row-end: 5;
+  padding: 0;
+  margin: 0;
   text-align: center;
   font-weight: 300;
-  font-size:1em;
-  color:#D9D9D9;
+  font-size: 1em;
+  color: #D9D9D9;
+  -webkit-app-region: no-drag;
+}
+
+.form {
+  grid-row-start: 5;
+  grid-row-end: 32;
+  font-size: .8em;
+  color: #D9D9D9;
+  -webkit-app-region: no-drag;
+  background-color: #4C5259;
 }
 
 form {
-  font-size: .8em;
+  margin: 5%;
   display: flex;
   flex-direction: column;
-  margin: 1em;
-  color:#D9D9D9;
-
 }
 
 .center-spacer {
-  height: 1em;
+  grid-row-start: 32;
+  grid-row-end: 100;
+  background-color: #4C5259;
+}
+
+.button-container {
+  grid-row-start: 100;
+  grid-row-end: 101;
+  -webkit-app-region: no-drag;
 }
 
 .export {
+  margin: 0 5% 8% 5%;
+  width: 90%;
   background-color: lightgreen;
   border-radius: 4px;
-  border:none;
+  border: none;
 }
 
 .deleteButton {
-  background:none;
-  border:none;
-  font-weight:bold;
+  background: none;
+  border: none;
+  font-weight: bold;
   cursor: pointer;
 }
