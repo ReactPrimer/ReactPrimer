@@ -7,13 +7,10 @@
   "scripts": {
     "dev": "webpack",
     "start": "electron .",
-    //Windows build
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/png/32x32.png --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"React Primer\"",
     "create-installer-win": "node installers/windows/createinstaller.js",
-    //Linux build
     "package-linux": "electron-packager .  Reactprimer --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/256x256.png --prune=true --out=release-builds",
     "create-debian-installer": "electron-installer-debian --src release-builds/Reactprimer-linux-x64/ --arch amd64 --config debian.json",
-    //Mac build
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "installer-mac": "electron-installer-dmg ./release-builds/ReactPrimer-darwin-x64/ReactPrimer.app ReactPrimer"
   },
