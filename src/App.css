@@ -1,26 +1,28 @@
 body {
   font-family: 'Nunito Sans', sans-serif;
   margin: 0px;
-  overflow-x: hidden;
   -webkit-app-region: drag;
 }
 
 .rst__nodeContent {
 
-
 }
+
 .rst__moveHandle {
   height: 1.8em !important;
   width:1.6em;
   /*background-color:white;*/
   /*background-image:url("updownarr.jpg") !important;*/
 }
+
 .rst__rowContents {
   height: 1.8em !important;
 }
+
 .rst__rowLabel {
   margin: 0 auto;
 }
+
 .rst__rowToolbar {
 
 }
@@ -35,15 +37,6 @@ body {
 }
 
 
-#RP {
-  font-family: arial;
-  font-size: 1em;
-  padding:1.4em;
-  margin-top:0px;
-  text-align: center;
-  background-color: #6D7984;
-  }
-
 .flex-container {
 display: flex;
 flex-direction: row;
@@ -52,21 +45,28 @@ justify-content: flex-start;
 height: 100vh;
 }
 
-.inputBox {
-/*border: 2px solid black;*/
+.left-sidebar {
 background-color: #4C5259;
 align-items:center stretch;
 flex:1.3;
 height: 100vh;
 }
 
-.tree {
-margin-top: 2.2em;
+.top-spacer {
+  font-family: arial;
+  font-size: 1em;
+  padding:1.4em;
+  margin-top:0px;
+  text-align: center;
+  background-color: #6D7984;
+  -webkit-app-region: drag;
+}
+
+.tree-container {
 background-color:white;
-  /*border: 2px solid black;*/
 flex: 3;
 color:#4C5259;
--webkit-app-region: no-drag;
+
 }
 
 h1 {
@@ -76,15 +76,18 @@ h1 {
   color:#D9D9D9;
 }
 
-.form {
+form {
   font-size: .8em;
   display: flex;
   flex-direction: column;
   margin: 1em;
   color:#D9D9D9;
-  -webkit-app-region: no-drag;
+
 }
 
+.center-spacer {
+  height: 1em;
+}
 
 .export {
   background-color: lightgreen;

@@ -34,7 +34,7 @@ class App extends Component {
   // Helper function creates an array of all component names
   extractCompNames(components, flattened = [], cache = {}) {
     components.forEach((element, index) => {
-      let name = 
+      let name =
         element.title
         // .toUpperCase()
       if (!cache[name]) {
@@ -122,10 +122,7 @@ class App extends Component {
     const getNodeKey = ({ treeIndex }) => treeIndex;
 
     return (
-
       <div className="flex-container">
-        <div className='inputBox'>
-          <h1 id="RP"></h1>
           <NewCompForm
             newName={this.state.newName}
             newParent={this.state.newParent}
@@ -136,11 +133,8 @@ class App extends Component {
             components={this.state.treeData}
             exportFiles={this.exportFiles}
           />
-          <br />
-
-
-        </div>
-        <div className="tree">
+        <div className='tree-container'>
+          <div className='top-spacer' />
           <SortableTree
             treeData={this.state.treeData}
             onChange={treeData => this.setState({ treeData })}

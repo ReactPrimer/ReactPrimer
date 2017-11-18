@@ -22,14 +22,13 @@ class NewCompForm extends Component {
     })
 
     return (
-      <div>
+      <div className='left-sidebar'>
+        <div className='top-spacer' />
         <h1>Create a new component</h1>
-
-        <form className="form">
+        <form>
           Name
         <input
             placeholder="Component Name"
-
             type='text'
             name='name'
             value={newName}
@@ -50,18 +49,11 @@ class NewCompForm extends Component {
             value='Add Component'
             onClick={handleSubmit}
           />
-          
-          <br />
-          <br />
-          <br />
-          <br /> 
-          <br />
-          <br />
-          <br />
-          <br />
-
-          <button className="export" onClick={exportFiles}>Export </button>
         </form>
+        <div className='center-spacer' />
+        <div className='button-container'>
+        <button className="export" onClick={exportFiles}>Export </button>
+        </div>
     </div>
   );
 }
