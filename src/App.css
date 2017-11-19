@@ -45,7 +45,7 @@ body {
 
 .top-spacer {
   display: flex;
-  height: 2.4em;
+  height: 2.8em;
 }
 
 .left-spacer {
@@ -68,7 +68,7 @@ body {
 
 .container {
   display: flex;
-  height: calc(100% - 2.4em);
+  height: calc(100% - 2.8em);
 }
 
 .tree-container {
@@ -94,9 +94,9 @@ body {
 
 h1 {
   grid-row-start: 1;
-  grid-row-end: 5;
+  grid-row-end: 12;
   padding: 0;
-  margin: 0;
+  margin: auto;
   text-align: center;
   font-weight: 300;
   font-size: 1em;
@@ -105,7 +105,7 @@ h1 {
 }
 
 .form {
-  grid-row-start: 5;
+  grid-row-start: 12;
   grid-row-end: 32;
   font-size: .8em;
   color: #D9D9D9;
