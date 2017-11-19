@@ -124,7 +124,10 @@ class App extends Component {
     return (
       <div className='top-container'>
         <div className='top-spacer'>
-          <div className='left-spacer'/>
+          <div className='left-spacer'>
+            <p>ReactPrimer</p>
+            <img className='logo' src={require('../assets/logo/32x32.png')} alt='logo'></img>
+          </div>
           <div className='right-spacer' />
         </div>
         <div className='container'>
