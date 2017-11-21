@@ -1,9 +1,12 @@
 <img src="/assets/icons/png/256x256.png" width="175"/>
+
 # ReactPrimer
+
 React Primer is component prototyping tool that generates fully connected class component code.
 <p align="center">
 <img src="/assets/demo/demo_15mb.gif"/>
 </p>
+
 ## Deployment Set Up
 
 ###### MacOS
