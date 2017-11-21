@@ -1,6 +1,9 @@
-# ReactPrimer
+<h1><center>ReactPrimer </center></h1>
+<p align="center">
+  <img src="/assets/png/128x128.png">
+</p>
 
-React Primer is component prototyping tool that generates fully connected class component code.
+<p>React Primer is component prototyping tool that generates fully connected class component code.</p>
 <p align="center">
 <img src="/assets/demo/demo_15mb.gif"/>
 </p>
