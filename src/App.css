@@ -13,11 +13,13 @@ body {
 
 }
 
+/* determines height of tree drag and drop handle*/
 .rst__moveHandle {
   height: 1.8em !important;
   width:1.6em;
 }
 
+/* determines height of tree component row*/
 .rst__rowContents {
   height: 1.8em !important;
 }
@@ -30,9 +32,11 @@ body {
 
 }
 
+/*sets the height and color of the landing pad*/
 .rst__rowCancelPad::before,.rst__rowLandingPad::before {
   height:1.8em !important;
   background-color:gray;
+  opacity: .3;
 }
 
 .rst__lineChildren::after {
