@@ -35,7 +35,7 @@
 * Save generated components locally to a new or existing project.
 
 ## Forking Your Own Version
-If you'd like to build your own version of React Primer:
+**If you'd like to build your own version of React Primer:**
 
 1. Clone the repo and `npm install` dependancies.
 
