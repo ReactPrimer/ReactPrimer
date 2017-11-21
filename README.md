@@ -1,86 +1,58 @@
 # ReactPrimer
 
-One Paragraph of project description goes here
+React Primer is component prototyping tool that generates fully connected class component code.
+<p align="center">
+<img src="/assets/demo/demo_15mb.gif"/>
+</p>
 
-## Getting Started
+## Deployment Set Up
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+###### MacOS
 
-### Prerequisites
+1. Download the current release.
+2. Open the installer.
+3. Move React Primer to you local application folder.
 
-What things you need to install the software and how to install them
+###### Linux
+1. tba
+2. tba
+3. tba
 
-```
-Give examples
-```
+### Usage
 
-### Installing
+* Name individual components, assign parent-child relationships, and add components to the project tree.
 
-A step by step series of examples that tell you have to get a development env running
+* Drag and drop individual components to restructure the hierarchy tree view.
 
-Say what the step will be
+* Export project to generate a folder of fully connected component classes.
 
-```
-Give the example
-```
+* Save generated components locally to a new or existing project.
 
-And repeat
+### Why
 
-```
-until finished
-```
+React Primer provides a visual representation of your project during the preliminary stages of development, before you write a single line of code.
 
-End with an example of getting some data out of the system or using it for a little demo
+This simple to use application saves time by generating component files that automatically require and render their child components based on the prototyped hierarchy.
 
-## Running the tests
+React Primer’s component tree GUI makes it easy to test, edit, and re-export your component tree as many times as needed.
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
+Please submit issues/pull requests if you have feedback or message the React Primer team to be added as a contributor:
+
+hello@react-primer.com
 
 
 ## Authors
 
-* *Kat* - https://github.com/ksampias
-* *Vince* - https://github.com/vincevuong
-* *Ken* - https://github.com/kenhughlee
+Ken Lee (https://github.com/kenhughlee)
+
+Kat Sampias (https://github.com/ksampias)
+
+Vince Vuong (https://github.com/vincevuong)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc

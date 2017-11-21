@@ -1,9 +1,9 @@
-//windows build requirement
-const setupEvents = require('./installers/setupEvents')
-if (setupEvents.handleSquirrelEvent()) {
-   // squirrel event handled and app will exit in 1000ms, so don't do anything else
-   return;
-}
+// //windows build requirement
+// const setupEvents = require('./installers/setupEvents')
+// if (setupEvents.handleSquirrelEvent()) {
+//    // squirrel event handled and app will exit in 1000ms, so don't do anything else
+//    return;
+// }
 
 // required electron modules
 const electron = require('electron');
