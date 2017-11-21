@@ -1,9 +1,9 @@
 <h1><center>ReactPrimer </center></h1>
 <p align="center">
-  <img src="/assets/png/128x128.png">
+  <img src="/assets/icons/png/128x128.png">
 </p>
 
-<p>React Primer is component prototyping tool that generates fully connected class component code.</p>
+<p align="center">React Primer is component prototyping tool that generates fully connected class component code.</p>
 <p align="center">
 <img src="/assets/demo/demo_15mb.gif"/>
 </p>
@@ -12,16 +12,19 @@
 
 ###### MacOS
 
-1. Download the current release.
+1. Download the latest release .dmg file.
 2. Open the installer.
 3. Move React Primer to you local application folder.
 
 ###### Linux
-1. tba
-2. tba
-3. tba
+1. Download the latest .deb file  
+2. Unpackage the .deb file 
+3. Find the executable in  usr/lib/React-Primer
 
-### Usage
+###### Windows
+*Coming Soon*
+
+## Usage
 
 * Name individual components, assign parent-child relationships, and add components to the project tree.
 
@@ -31,7 +34,43 @@
 
 * Save generated components locally to a new or existing project.
 
-### Why
+## Forking Your Own Version
+If you'd like to build your own version of React Primer:
+
+1. Clone the repo and `npm install` dependancies.
+
+2. Open one terminal and `npm run dev` to generate the webpack build.
+
+3. Open another terminal and `npm start` to start Electron.
+
+4. Uncomment line 23 `require('electron-reload')(__dirname);` for hot reloading (Optional).
+
+3. Enable Devloper Tools (Optional).
+
+&nbsp;&nbsp;&nbsp;&nbsp; *Chrome Developer Tool*
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a. Uncomment line 45 `mainWindow.webContents.openDevTools()`
+
+&nbsp;&nbsp;&nbsp;&nbsp; *React Developer Tool*
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a. Uncomment line 78 `const configValues = require('./config');`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b. Uncomment line 79 `BrowserWindow.addDevToolsExtension(configValues.absolutePath);`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c. Create `./config` in root directory:
+
+```
+{
+  "absolutePath": "/Users/*User*/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/2.5.2_0"
+}
+```
+
+
+
+
+If you have any additional questions send us a message at reactsight@gmail.com :)
+
+## Why
 
 React Primer provides a visual representation of your project during the preliminary stages of development, before you write a single line of code.
 
@@ -43,9 +82,7 @@ React Primer’s component tree GUI makes it easy to test, edit, and re-export y
 ## Contributing
 
 
-Please submit issues/pull requests if you have feedback or message the React Primer team to be added as a contributor:
-
-hello@react-primer.com
+Please submit issues/pull requests if you have feedback or message the React Primer team to be added as a contributor: hello@react-primer.com
 
 
 ## Authors
