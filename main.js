@@ -77,10 +77,13 @@ function createWindow() {
   IPC.on('componentTree', (event, components) => {
     let flattenComps = flattenComponent(components);
     dialog.showOpenDialog({
-      title: 'please select where to export',
+      title: 'Please select where to export',
       properties: ['openDirectory'],
       buttonLabel: 'Save'
-    }, fileDir => {
+    }, 
+    
+    fileDir => {
+      if (!fileDir) return;
       let projDir = fileDir + '/components';
       fs.mkdir(projDir, err => {
         if (err) {
