@@ -8,16 +8,16 @@
 <img src="/assets/demo/demo_15mb.gif"/>
 </p>
 
-## Deployment Set Up
+## Setup
 
 ###### MacOS
 
-1. Download the latest release .dmg file.
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/ReactPrimer.dmg) the latest release .dmg file.
 2. Open the installer.
 3. Move React Primer to you local application folder.
 
 ###### Linux
-1. Download the latest .deb file  
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .deb file  
 2. Unpackage the .deb file 
 3. Find the executable in  usr/lib/React-Primer
 
@@ -64,9 +64,6 @@ If you'd like to build your own version of React Primer:
   "absolutePath": "/Users/*User*/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/2.5.2_0"
 }
 ```
-
-
-
 
 If you have any additional questions send us a message at reactsight@gmail.com :)
 
