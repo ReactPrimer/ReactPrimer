@@ -11,6 +11,8 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const IPC = require('electron').ipcMain;
 const { dialog } = require('electron');
+const Menu = electron.Menu;
+const openAboutWindow = require('about-window').default;
 
 const path = require('path');
 const url = require('url');
@@ -20,7 +22,7 @@ const fs = require('fs');
 const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
-require('electron-reload')(__dirname);
+// require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -41,8 +43,28 @@ function createWindow() {
     slashes: true
   }))
 
+  // About React Primer window in menu
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'React Primer',
+      submenu: [
+        {
+          label: 'About React Primer',
+          click: () => openAboutWindow({
+            icon_path: path.join(__dirname, './assets/icons/png/256x256.png'),
+            copyright: 'Copyright © 2017 React Primer. All Rights Reserved.',
+            homepage: 'http://react-primer.com/',
+            bug_report_url: 'https://github.com/ReactPrimer/ReactPrimer/issues',
+            description: "React Prototyping Tool"
+          })
+        }
+      ]
+    }
+  ]);
+  Menu.setApplicationMenu(menu);
+
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
 
 
