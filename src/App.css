@@ -60,14 +60,17 @@ body {
   background-color: #6D7984;
 }
 
-.logo {
-  margin: 0 15px 0 12px;
-  height: 2em;
-  width: 2em;
-}
-
 .right-spacer {
   flex: 3;
+  display: flex;
+}
+
+.filler-a {
+  flex: 10;
+}
+
+.filler-b {
+  flex: 1;
 }
 
 .container {
@@ -79,12 +82,27 @@ body {
   height: 100%;
   flex: 3;
   align-self: flex-end;
+  display: flex;
   background-color: white;
   color: #4C5259;
 }
 
 .sortable-tree {
   -webkit-app-region: no-drag;
+  flex: 10;
+}
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+img {
+  padding: 0% 20% 20% 0%;
+  height: 2em;
+  width: 2em;
 }
 
 .form-container {
