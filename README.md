@@ -65,8 +65,6 @@ If you'd like to build your own version of React Primer:
 }
 ```
 
-If you have any additional questions send us a message at reactsight@gmail.com :)
-
 ## Why
 
 React Primer provides a visual representation of your project during the preliminary stages of development, before you write a single line of code.
