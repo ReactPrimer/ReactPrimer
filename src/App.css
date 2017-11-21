@@ -1,100 +1,169 @@
+html, head, #root {
+  height: 100%;
+}
+
 body {
   font-family: 'Nunito Sans', sans-serif;
-  margin: 0px;
-  overflow-x: hidden;
+  margin: 0;
+  height: 100%;
   -webkit-app-region: drag;
 }
 
 .rst__nodeContent {
 
-
 }
+
+/* determines height of tree drag and drop handle*/
 .rst__moveHandle {
   height: 1.8em !important;
   width:1.6em;
-  /*background-color:white;*/
-  /*background-image:url("updownarr.jpg") !important;*/
 }
+
+/* determines height of tree component row*/
 .rst__rowContents {
   height: 1.8em !important;
 }
+
 .rst__rowLabel {
   margin: 0 auto;
 }
+
 .rst__rowToolbar {
 
 }
 
+/*sets the height and color of the landing pad*/
 .rst__rowCancelPad::before,.rst__rowLandingPad::before {
-    height:1.8em !important;
-    background-color:gray;
+  height:1.8em !important;
+  background-color:gray;
+  opacity: .3;
 }
 
 .rst__lineChildren::after {
   height:30px !important;
 }
 
+.top-container {
+  height: 100%;
+}
 
-#RP {
-  font-family: arial;
-  font-size: 1em;
-  padding:1.4em;
-  margin-top:0px;
-  text-align: center;
+.top-spacer {
+  display: flex;
+  height: 2.8em;
+}
+
+.left-spacer {
+  flex: 1.3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   background-color: #6D7984;
-  }
-
-.flex-container {
-display: flex;
-flex-direction: row;
-flex-wrap:nowrap;
-justify-content: flex-start;
-height: 100vh;
 }
 
-.inputBox {
-/*border: 2px solid black;*/
-background-color: #4C5259;
-align-items:center stretch;
-flex:1.3;
-height: 100vh;
+.right-spacer {
+  flex: 3;
+  display: flex;
 }
 
-.tree {
-margin-top: 2.2em;
-background-color:white;
-  /*border: 2px solid black;*/
-flex: 3;
-color:#4C5259;
--webkit-app-region: no-drag;
+.filler-a {
+  flex: 10;
+}
+
+.filler-b {
+  flex: 1;
+}
+
+.container {
+  display: flex;
+  height: calc(100% - 2.8em);
+}
+
+.tree-container {
+  height: 100%;
+  flex: 3;
+  align-self: flex-end;
+  display: flex;
+  background-color: white;
+  color: #4C5259;
+}
+
+.sortable-tree {
+  -webkit-app-region: no-drag;
+  flex: 10;
+}
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+img {
+  padding: 0% 20% 20% 0%;
+  height: 2em;
+  width: 2em;
+}
+
+.form-container {
+  height: 100%;
+  flex: 1.3;
+  align-self: flex-end;
+  display: grid;
+  grid-template-rows: 1%;
+  background-color: #4C5259;
 }
 
 h1 {
+  grid-row-start: 1;
+  grid-row-end: 12;
+  padding: 0;
+  margin: auto;
   text-align: center;
   font-weight: 300;
-  font-size:1em;
-  color:#D9D9D9;
-}
-
-.form {
-  font-size: .8em;
-  display: flex;
-  flex-direction: column;
-  margin: 1em;
-  color:#D9D9D9;
+  font-size: 1em;
+  color: #D9D9D9;
   -webkit-app-region: no-drag;
 }
 
+.form {
+  grid-row-start: 12;
+  grid-row-end: 32;
+  font-size: .8em;
+  color: #D9D9D9;
+  -webkit-app-region: no-drag;
+  background-color: #4C5259;
+}
+
+form {
+  margin: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-spacer {
+  grid-row-start: 32;
+  grid-row-end: 100;
+  background-color: #4C5259;
+}
+
+.button-container {
+  grid-row-start: 100;
+  grid-row-end: 101;
+  -webkit-app-region: no-drag;
+}
 
 .export {
+  margin: 0 5% 8% 5%;
+  width: 90%;
   background-color: lightgreen;
   border-radius: 4px;
-  border:none;
+  border: none;
 }
 
 .deleteButton {
-  background:none;
-  border:none;
-  font-weight:bold;
+  background: none;
+  border: none;
+  font-weight: bold;
   cursor: pointer;
 }
