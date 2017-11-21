@@ -5,6 +5,7 @@
   "description": "Production Project",
   "main": "main.js",
   "scripts": {
+    "test": "jest",
     "dev": "webpack",
     "start": "electron .",
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/png/32x32.png --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"React Primer\"",
@@ -14,11 +15,23 @@
     "create-debian-installer": "electron-installer-debian --src release-builds/Reactprimer-linux-x64/ --arch amd64 --config debian.json",
     "installer-mac": "electron-installer-dmg ./release-builds/ReactPrimer-darwin-x64/ReactPrimer.app ReactPrimer"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "identity-obj-proxy"
+    },
+    "setupFiles": [
+      "./test/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "repository": "https://github.com/ReactPrimer/ReactPrimer",
   "author": "KVK",
   "license": "CC0-1.0",
   "devDependencies": {
     "babel-core": "^6.23.1",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-preset-react": "^6.23.0",
     "css-loader": "^0.26.1",
@@ -31,13 +44,20 @@
     "electron-winstaller": "^2.6.3",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.9.0",
+    "identity-obj-proxy": "^3.0.0",
+    "sinon": "^4.1.2",
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "electron-packager-interactive": "^0.1.2",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
+    "enzyme-to-json": "^3.2.2",
     "path": "^0.12.7",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-sortable-tree": "^1.5.0"
+    "react-sortable-tree": "^1.5.0",
+    "react-test-renderer": "^16.1.1"
   }
 }
