@@ -1,86 +1,93 @@
-# ReactPrimer
+<h1><center>ReactPrimer </center></h1>
+<p align="center">
+  <img src="/assets/icons/png/128x128.png">
+</p>
 
-One Paragraph of project description goes here
+<p align="center">React Primer is component prototyping tool that generates fully connected class component code.</p>
+<p align="center">
+<img src="/assets/demo/demo_15mb.gif"/>
+</p>
 
-## Getting Started
+## Setup
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+###### MacOS
 
-### Prerequisites
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/ReactPrimer.dmg) the latest release .dmg file.
+2. Open the installer.
+3. Move React Primer to you local application folder.
 
-What things you need to install the software and how to install them
+###### Linux
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .deb file  
+2. Unpackage the .deb file 
+3. Find the executable in  usr/lib/React-Primer
+
+###### Windows
+*Coming Soon*
+
+## Usage
+
+* Name individual components, assign parent-child relationships, and add components to the project tree.
+
+* Drag and drop individual components to restructure the hierarchy tree view.
+
+* Export project to generate a folder of fully connected component classes.
+
+* Save generated components locally to a new or existing project.
+
+## Forking Your Own Version
+**If you'd like to build your own version of React Primer:**
+
+1. Clone the repo and `npm install` dependancies.
+
+2. Open one terminal and `npm run dev` to generate the webpack build.
+
+3. Open another terminal and `npm start` to start Electron.
+
+4. Uncomment line 23 `require('electron-reload')(__dirname);` for hot reloading (Optional).
+
+3. Enable Devloper Tools (Optional).
+
+&nbsp;&nbsp;&nbsp;&nbsp; *Chrome Developer Tool*
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a. Uncomment line 45 `mainWindow.webContents.openDevTools()`
+
+&nbsp;&nbsp;&nbsp;&nbsp; *React Developer Tool*
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a. Uncomment line 78 `const configValues = require('./config');`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b. Uncomment line 79 `BrowserWindow.addDevToolsExtension(configValues.absolutePath);`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c. Create `./config` in root directory:
 
 ```
-Give examples
+{
+  "absolutePath": "/Users/*User*/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/2.5.2_0"
+}
 ```
 
-### Installing
+## Why
 
-A step by step series of examples that tell you have to get a development env running
+React Primer provides a visual representation of your project during the preliminary stages of development, before you write a single line of code.
 
-Say what the step will be
+This simple to use application saves time by generating component files that automatically require and render their child components based on the prototyped hierarchy.
 
-```
-Give the example
-```
+React Primer’s component tree GUI makes it easy to test, edit, and re-export your component tree as many times as needed.
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
+Please submit issues/pull requests if you have feedback or message the React Primer team to be added as a contributor: hello@react-primer.com
 
 
 ## Authors
 
-* *Kat* - https://github.com/ksampias
-* *Vince* - https://github.com/vincevuong
-* *Ken* - https://github.com/kenhughlee
+Ken Lee (https://github.com/kenhughlee)
+
+Kat Sampias (https://github.com/ksampias)
+
+Vince Vuong (https://github.com/vincevuong)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc

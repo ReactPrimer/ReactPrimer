@@ -9,10 +9,10 @@
     "dev": "webpack",
     "start": "electron .",
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/png/32x32.png --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"React Primer\"",
-    "package-linux": "electron-packager .  Reactprimer --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/256x256.png --prune=true --out=release-builds",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "create-installer-win": "node installers/windows/createinstaller.js",
+    "package-linux": "electron-packager .  Reactprimer --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/256x256.png --prune=true --out=release-builds",
     "create-debian-installer": "electron-installer-debian --src release-builds/Reactprimer-linux-x64/ --arch amd64 --config debian.json",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "installer-mac": "electron-installer-dmg ./release-builds/ReactPrimer-darwin-x64/ReactPrimer.app ReactPrimer"
   },
   "jest": {
@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
+    "about-window": "^1.8.0",
     "electron-packager-interactive": "^0.1.2",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
