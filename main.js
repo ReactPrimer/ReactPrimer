@@ -1,3 +1,4 @@
+
 // //windows build requirement
 // const setupEvents = require('./installers/setupEvents')
 // if (setupEvents.handleSquirrelEvent()) {
@@ -5,14 +6,17 @@
 //    return;
 // }
 
+
 // required electron modules
 const electron = require('electron');
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const IPC = require('electron').ipcMain;
+
 const { dialog } = require('electron');
 const Menu = electron.Menu;
 const openAboutWindow = require('about-window').default;
+
 
 const path = require('path');
 const url = require('url');
@@ -21,6 +25,8 @@ const fs = require('fs');
 // file template generator function
 const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
+const openFile = require('./openFile.js');
+const saveFile = require('./saveFile.js');
 
 // require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
@@ -36,6 +42,40 @@ function createWindow() {
     minHeight: 360,
     icon: path.join(__dirname, './assets/icons/png/128x128.png')
   })
+/*
+  //menu items
+  const menuTemplate = [
+    {
+      label:'File',
+      submenu: [{
+        label:'Open',
+        click:()=>{
+          openFile();
+        }
+      },
+      // {
+      //   label:'Save as',
+      //   click:()=>{
+      //     saveFile();
+      //   }
+      // },
+      // {
+      //   label:'Save',
+      //   click:()=>{
+      //     saveFile();
+      //   }
+      // },
+      {
+        label:'Quit',
+        click:()=>{
+          app.quit();
+        }
+      }]
+    }
+  ];
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+*/
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
@@ -90,15 +130,37 @@ function createWindow() {
           dialog.showErrorBox('Duplicate Folder Error', 'A component folder already exists in selected directory')
         }
         else {
-          dialog.showMessageBox({ message: 'Component folder has been exported.', buttons: ['OK'] })
           for (let k = 0; k < flattenComps.length; k++) {
             fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]));
           };
+
+          dialog.showMessageBox({ message: 'Component folder has been exported.', buttons: ['OK'] })
           event.sender.send('fileSuccess', 412)
         }
       });
     })
   })
+
+IPC.on('openFile',(event) =>{
+  dialog.showOpenDialog({
+      title:'Please select your .rp file',
+      properties:['openFile'],
+      filters:[{name:'All Files', extensions: ['rp']}]
+    },
+      filename => {
+        fs.readFileSync(filename, data => {
+          event.sender.send('fileData', data);
+        })
+      }
+    )
+})
+
+IPC.on('saveFile',(event,state) =>{
+  dialog.showSaveDialog( filename => {
+      fs.writeFileSync(filename,state);
+      })
+  });
+
 
   // As we are in windows, escape the slash with another
   // const configValues = require('./config');
