@@ -1,12 +1,22 @@
 
+// //windows build requirement
+// const setupEvents = require('./installers/setupEvents')
+// if (setupEvents.handleSquirrelEvent()) {
+//    // squirrel event handled and app will exit in 1000ms, so don't do anything else
+//    return;
+// }
+
+
 // required electron modules
 const electron = require('electron');
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const IPC = require('electron').ipcMain;
+
 const { dialog } = require('electron');
 const Menu = electron.Menu;
 const openAboutWindow = require('about-window').default;
+
 
 const path = require('path');
 const url = require('url');
@@ -105,10 +115,13 @@ function createWindow() {
   IPC.on('componentTree', (event, components) => {
     let flattenComps = flattenComponent(components);
     dialog.showOpenDialog({
-      title: 'please select where to export',
+      title: 'Please select where to export',
       properties: ['openDirectory'],
       buttonLabel: 'Save'
-    }, fileDir => {
+    },
+
+    fileDir => {
+      if (!fileDir) return;
       let projDir = fileDir + '/components';
       fs.mkdir(projDir, err => {
         if (err) {
