@@ -22,49 +22,42 @@ class NewCompForm extends Component {
     })
 
     return (
-      <div>
+      <div className='form-container'>
         <h1>Create a new component</h1>
-
-        <form className="form">
-          Name
-        <input
-            placeholder="Component Name"
-
-            type='text'
-            name='name'
-            value={newName}
-            onChange={handleInputChange}
-          />
-          <br />
-          Parent
-          <select
-            name='parent'
-            onChange={handleSelectChange}
-            >
-            <option value='-'>-</option>
-            {parents}
-          </select>
-          <br />
-          <input
-            type='submit'
-            value='Add Component'
-            onClick={handleSubmit}
-          />
-          
-          <br />
-          <br />
-          <br />
-          <br /> 
-          <br />
-          <br />
-          <br />
-          <br />
-
+        <div className='form'>
+          <form>
+            Name
+            <input
+              placeholder="Component Name"
+              type='text'
+              name='name'
+              value={newName}
+              onChange={handleInputChange}
+              />
+            <br />
+            Parent
+            <select
+              name='parent'
+              onChange={handleSelectChange}
+              >
+              <option value='-'>-</option>
+              {parents}
+            </select>
+            <br />
+            <input
+              type='submit'
+              value='Add Component'
+              onClick={handleSubmit}
+              />
+          </form>
+        </div>
+        <div className='center-spacer' />
+        <div className='button-container'>
           <button className="export" onClick={exportFiles}>Export </button>
-        </form>
-    </div>
-  );
-}
+        </div>
+      </div>
+    );
+  }
 
 }
 
