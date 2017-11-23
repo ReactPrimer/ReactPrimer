@@ -17,7 +17,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "^.+\\.(css|scss|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+      "^.+\\.(css|scss|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy",
+      "electron": "<rootDir>/test/mock/electron.js"
     },
     "setupFiles": [
       "./test/jestsetup.js"
