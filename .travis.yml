@@ -10,4 +10,5 @@ node_js:
 install:
   - npm install
 script:
+- npm run dev
 - npm test
