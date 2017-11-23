@@ -10,7 +10,9 @@ class NewCompForm extends Component {
       handleSelectChange,
       handleSubmit,
       components,
-      exportFiles
+      exportFiles,
+      saveFile,
+      openFile
     } = this.props
 
     // Creates an option element in dropdown menu for each component name in state.
@@ -53,6 +55,8 @@ class NewCompForm extends Component {
         </div>
         <div className='center-spacer' />
         <div className='button-container'>
+          <button onClick={saveFile}>save</button>
+          <button onClick={openFile}>open</button>
           <button className="export" onClick={exportFiles}>Export </button>
         </div>
       </div>

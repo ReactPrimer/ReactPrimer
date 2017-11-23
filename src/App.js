@@ -24,6 +24,9 @@ class App extends Component {
     this.searchTreeData = this.searchTreeData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.exportFiles = this.exportFiles.bind(this);
+    this.saveFile = this.saveFile.bind(this);
+    this.openFile = this.openFile.bind(this);
+
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
@@ -116,8 +119,22 @@ class App extends Component {
     e.preventDefault()
     IPC.send('componentTree', this.state.treeData);
   }
+  saveFile(e) {
+    e.preventDefault()
+    IPC.send('saveFile', this.state.treeData);
+  }
+  openFile(e) {
+    e.preventDefault()
+    IPC.send('openFile','');
+}
+componentDidMount() {
+    IPC.on('fileData', (event,data)=> {
+      this.setState({treeData:data});
+   })
 
+}
   render() {
+
     // Nodekey used to identify node to be removed.
     const getNodeKey = ({ treeIndex }) => treeIndex;
 
@@ -140,6 +157,8 @@ class App extends Component {
             handleSubmit={this.handleSubmit}
             components={this.state.treeData}
             exportFiles={this.exportFiles}
+            openFile={this.openFile}
+            saveFile={this.saveFile}
             />
           <div className='tree-container'>
             <SortableTree
@@ -164,6 +183,7 @@ class App extends Component {
               <div className='logo-container'>
                 <img className='logo' src={require('../assets/logo/48x48.png')} alt='logo'></img>
               </div>
+
           </div>
           </div>
         </div>
