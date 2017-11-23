@@ -26,7 +26,7 @@ const fs = require('fs');
 const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
-// require('electron-reload')(__dirname);
+require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -40,40 +40,6 @@ function createWindow() {
     minHeight: 360,
     icon: path.join(__dirname, './assets/icons/png/128x128.png')
   })
-/*
-  //menu items
-  const menuTemplate = [
-    {
-      label:'File',
-      submenu: [{
-        label:'Open',
-        click:()=>{
-          openFile();
-        }
-      },
-      // {
-      //   label:'Save as',
-      //   click:()=>{
-      //     saveFile();
-      //   }
-      // },
-      // {
-      //   label:'Save',
-      //   click:()=>{
-      //     saveFile();
-      //   }
-      // },
-      {
-        label:'Quit',
-        click:()=>{
-          app.quit();
-        }
-      }]
-    }
-  ];
-  const menu = Menu.buildFromTemplate(menuTemplate);
-  Menu.setApplicationMenu(menu);
-*/
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
@@ -102,7 +68,7 @@ function createWindow() {
   Menu.setApplicationMenu(menu);
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
 
 
@@ -143,20 +109,25 @@ IPC.on('openFile',(event) =>{
   dialog.showOpenDialog({
       title:'Please select your .rp file',
       properties:['openFile'],
-      filters:[{name:'All Files', extensions: ['rp']}]
+      filters:[{name:'All Files', extensions: ['rpf']}]
     },
       filename => {
-        fs.readFileSync(filename, data => {
-          IPC.send('fileData', data);
-        })
+        fs.readFile(filename[0], (err,data)=> {
+          event.sender.send('fileData', JSON.parse(data));
+        });
       }
     )
 })
 
 IPC.on('saveFile',(event,state) =>{
-  dialog.showSaveDialog( filename => {
-      fs.writeFileSync(filename,state);
-      })
+  dialog.showSaveDialog({
+    filters: [{
+      name: 'React Primer Project File',
+      extensions: ['rpf']
+    }]
+  }, filename => {
+      fs.writeFileSync(filename,JSON.stringify(state));
+        })
   });
 
 
