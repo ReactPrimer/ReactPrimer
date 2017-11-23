@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/{ReactPrimer}/{ReactPrimer}.png?branch=master)](https://travis-ci.org/{ReactPrimer}/{ReactPrimer})
 <h1><center>ReactPrimer </center></h1>
 <p align="center">
   <img src="/assets/icons/png/128x128.png">
