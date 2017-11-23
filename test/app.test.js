@@ -6,6 +6,7 @@ import sinon from 'sinon';
 import App from '../src/App';
 import NewCompForm from '../src/NewCompForm';
 import SortableTree from 'react-sortable-tree'
+const IPC = require('electron').ipcRenderer;
 
 describe('<App />',() => {
   let component;
@@ -27,7 +28,7 @@ describe('<App />',() => {
     expect(component.instance().extractCompNames(comp)).toEqual(['Test1','Test2','Test3']);
   })
   it('input validation- correct casing', ()=> {
-    expect(component.instance().formatName('big  dog     banana     monkey')).toEqual('BigDogBananaMonkey');
+    expect(component.instance().formatName('big dog banana monkey')).toEqual('BigDogBananaMonkey');
   })
   it('input validation- correct casing', ()=> {
     expect(component.instance().formatName('this is amazing')).toEqual('ThisIsAmazing');
@@ -39,7 +40,7 @@ describe('<App />',() => {
 
 /*
    (maybe needs spectrum) check if export button sends message to backend
-  
+
   check if parent data is appended to drop down
   check if correct name data gets added to the correct place in state object
   check if parent data is appended to drop down

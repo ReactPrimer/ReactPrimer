@@ -25,8 +25,6 @@ const fs = require('fs');
 // file template generator function
 const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
-const openFile = require('./openFile.js');
-const saveFile = require('./saveFile.js');
 
 // require('electron-reload')(__dirname);
 // Keep a global reference of the window object, if you don't, the window will
@@ -104,7 +102,7 @@ function createWindow() {
   Menu.setApplicationMenu(menu);
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
 
 
@@ -120,8 +118,8 @@ function createWindow() {
       title: 'Please select where to export',
       properties: ['openDirectory'],
       buttonLabel: 'Save'
-    }, 
-    
+    },
+
     fileDir => {
       if (!fileDir) return;
       let projDir = fileDir + '/components';
@@ -149,7 +147,7 @@ IPC.on('openFile',(event) =>{
     },
       filename => {
         fs.readFileSync(filename, data => {
-          event.sender.send('fileData', data);
+          IPC.send('fileData', data);
         })
       }
     )
