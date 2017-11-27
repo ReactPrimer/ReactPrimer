@@ -53,9 +53,11 @@ class NewCompForm extends Component {
           </form>
         </div>
         <div className='center-spacer' />
+        <div className='save-load-container'>
+        <button className='open-button' onClick={saveFile}>Save</button>
+        <button className='save-button' onClick={openFile}>Load</button>
+        </div>
         <div className='button-container'>
-          <button onClick={saveFile}>save</button>
-          <button onClick={openFile}>open</button>
           <button className="export" onClick={exportFiles}>Export </button>
         </div>
       </div>
