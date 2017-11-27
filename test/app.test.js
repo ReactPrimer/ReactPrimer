@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, render } from 'enzyme';
-import sinon from 'sinon';
+// import sinon from 'sinon';
 
 import App from '../src/App';
 import NewCompForm from '../src/NewCompForm';
@@ -29,6 +29,12 @@ describe('<App />',() => {
   })
   it('input validation- correct casing', ()=> {
     expect(component.instance().formatName('big dog banana monkey')).toEqual('BigDogBananaMonkey');
+  })
+  it('input validation- correct casing', ()=> {
+    expect(component.instance().formatName('big dog banana monkey    ')).toEqual('BigDogBananaMonkey');
+  })
+  it('input validation- correct casing', ()=> {
+    expect(component.instance().formatName('big   dog  banana   monkey    ')).toEqual('BigDogBananaMonkey');
   })
   it('input validation- correct casing', ()=> {
     expect(component.instance().formatName('this is amazing')).toEqual('ThisIsAmazing');
