@@ -1,4 +1,4 @@
-
+# Travis configuration file for testing:
 language: node_js
 node_js:
   - "8.5"

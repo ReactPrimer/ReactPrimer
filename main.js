@@ -1,4 +1,3 @@
-
 // //windows build requirement
 // const setupEvents = require('./installers/setupEvents')
 // if (setupEvents.handleSquirrelEvent()) {
@@ -6,18 +5,16 @@
 //    return;
 // }
 
-
 // required electron modules
 const electron = require('electron');
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const IPC = require('electron').ipcMain;
-
 const { dialog } = require('electron');
 const Menu = electron.Menu;
 const openAboutWindow = require('about-window').default;
 
-
+// required node modules
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -26,10 +23,13 @@ const fs = require('fs');
 const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
+// for development - Hot-Reloading
 require('electron-reload')(__dirname);
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow;
+
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -47,7 +47,7 @@ function createWindow() {
     slashes: true
   }))
 
-  // About React Primer window in menu
+  // About React-Primer window in menu
   const menu = Menu.buildFromTemplate([
     {
       label: 'React Primer',
@@ -61,7 +61,14 @@ function createWindow() {
             bug_report_url: 'https://github.com/ReactPrimer/ReactPrimer/issues',
             description: "React Prototyping Tool"
           })
-        }
+        },
+        {
+          label: 'Quit',
+          accelerator: 'CmdOrCtrl+Q',
+          click: () => {
+            app.quit();
+          }
+        },
       ]
     }
   ]);
@@ -71,13 +78,23 @@ function createWindow() {
   mainWindow.webContents.openDevTools()
 
 
+  /*****
+   
+  Functions for Electron backend functionality: 
+    componentTree:
+    - the IPC listens for component info to be received from the front end.
+    - openDialog lets user to select where exported file folder will be generated.
+    - openDialog outputs the file directory (fileDir) that was chosen by the user.
+    - a directory gets created.
+    - for each component filecontent is called and file is generated with its content.
 
-  /* - the IPC listens for component info to be received from the front end.
-     - openDialog lets user to select where exported file folder will be generated.
-     - openDialog outputs the file directory (fileDir) that was chosen by the user.
-     - a directory gets created.
-     - for each component filecontent is called and file is generated with its content.
-  */
+    openFile:
+    - allows user to import project file
+
+    saveFile:
+    - allows user to save project file
+    
+  *****/
   IPC.on('componentTree', (event, components) => {
     let flattenComps = flattenComponent(components);
     dialog.showOpenDialog({
@@ -85,53 +102,56 @@ function createWindow() {
       properties: ['openDirectory'],
       buttonLabel: 'Save'
     },
+      fileDir => {
+        if (!fileDir) return;
+        let projDir = fileDir + '/components';
+        fs.mkdir(projDir, err => {
+          if (err) {
+            dialog.showErrorBox('Duplicate Folder Error', 'A component folder already exists in selected directory')
+          }
+          else {
+            for (let k = 0; k < flattenComps.length; k++) {
+              fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]));
+            };
 
-    fileDir => {
-      if (!fileDir) return;
-      let projDir = fileDir + '/components';
-      fs.mkdir(projDir, err => {
-        if (err) {
-          dialog.showErrorBox('Duplicate Folder Error', 'A component folder already exists in selected directory')
-        }
-        else {
-          for (let k = 0; k < flattenComps.length; k++) {
-            fs.writeFileSync(projDir + '/' + flattenComps[k].title + '.jsx', fileContent(flattenComps[k]));
-          };
-
-          dialog.showMessageBox({ message: 'Component folder has been exported.', buttons: ['OK'] })
-          event.sender.send('fileSuccess', 412)
-        }
-      });
-    })
+            dialog.showMessageBox({ message: 'Component folder has been exported.', buttons: ['OK'] })
+            event.sender.send('fileSuccess', 412)
+          }
+        });
+      })
   })
-
-IPC.on('openFile',(event) =>{
-  dialog.showOpenDialog({
-      title:'Please select your .rp file',
-      properties:['openFile'],
-      filters:[{name:'All Files', extensions: ['rpf']}]
+  IPC.on('openFile', (event) => {
+    dialog.showOpenDialog({
+      title: 'Please select your .rpf file',
+      properties: ['openFile'],
+      filters: [{ name: 'All Files', extensions: ['rpf'] }]
     },
       filename => {
-        fs.readFile(filename[0], (err,data)=> {
+        if (!filename) return;
+        fs.readFile(filename[0], (err, data) => {
           event.sender.send('fileData', JSON.parse(data));
         });
       }
     )
-})
-
-IPC.on('saveFile',(event,state) =>{
-  dialog.showSaveDialog({
-    filters: [{
-      name: 'React Primer Project File',
-      extensions: ['rpf']
-    }]
-  }, filename => {
-      fs.writeFileSync(filename,JSON.stringify(state));
-        })
+  })
+  IPC.on('saveFile', (event, state) => {
+    dialog.showSaveDialog({
+      filters: [{
+        name: 'React Primer Project File',
+        extensions: ['rpf']
+      }]
+    }, filename => {
+      if (!filename) return;
+      fs.writeFileSync(filename, JSON.stringify(state));
+    })
   });
 
+  /*****
+    
+  Requires in direct path for React Dev Tools:
+    - File path will be unique to the dev tools location on the developer's machine. 
 
-  // As we are in windows, escape the slash with another
+  *****/
   // const configValues = require('./config');
   // BrowserWindow.addDevToolsExtension(configValues.absolutePath);
 
@@ -142,9 +162,7 @@ IPC.on('saveFile',(event,state) =>{
     // when you should delete the corresponding element.
     mainWindow = null
   })
-
 }
-
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -159,6 +177,7 @@ app.on('window-all-closed', function () {
     app.quit()
   }
 })
+
 
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the

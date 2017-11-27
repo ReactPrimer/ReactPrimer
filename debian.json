@@ -1,3 +1,4 @@
+// Linux configuration for release build and executable
 {
   "dest": "release-builds/",
   "icon": "assets/icons/png/128x128.png",

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class NewCompForm extends Component {
-
   render() {
     const {
       newName,
@@ -35,13 +34,13 @@ class NewCompForm extends Component {
               name='name'
               value={newName}
               onChange={handleInputChange}
-              />
+            />
             <br />
             Parent
             <select
               name='parent'
               onChange={handleSelectChange}
-              >
+            >
               <option value='-'>-</option>
               {parents}
             </select>
@@ -50,7 +49,7 @@ class NewCompForm extends Component {
               type='submit'
               value='Add Component'
               onClick={handleSubmit}
-              />
+            />
           </form>
         </div>
         <div className='center-spacer' />
@@ -62,7 +61,6 @@ class NewCompForm extends Component {
       </div>
     );
   }
-
 }
 
 export default NewCompForm;

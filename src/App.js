@@ -29,17 +29,11 @@ class App extends Component {
 
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //     const vitalStateChange = this.state.treeData !== nextState.treeData;
-  //     return vitalStateChange;
-  // }
-
-  // Helper function creates an array of all component names
+  // Helper function creates an array of all component names to be used for form dropdown.
   extractCompNames(components, flattened = [], cache = {}) {
     components.forEach((element, index) => {
       let name =
-      element.title
-      // .toUpperCase()
+        element.title
       if (!cache[name]) {
         cache[name] = true;
         flattened.push(element.title);
@@ -49,27 +43,32 @@ class App extends Component {
     return flattened;
   }
 
-  // Updates a placeholder in state with text input value.
+  /*****
+ 
+  Functions for form data submission: 
+  - handleInputChange:  Updates a placeholder in state with text input value.
+  - handleSelectChange: Updates a placeholder in state with selected value.
+  - formatName:         Formats casing and spacing, and removes file extenions from input.
+  - searchTreeData:     Helper function finds parent in state, & update with new child element.
+  - handleSubmit:       Submits form data and updates state with new component details.
+
+  *****/
   handleInputChange(e) {
     this.setState({ newName: e.target.value })
   }
-
-  // Updates a placeholder in state with selected value.
   handleSelectChange(e) {
     this.setState({ newParent: e.target.value })
   }
-
-  // Formats casing and spacing, and removes file extenions from input
   formatName(userInput) {
     let result = userInput
-    .replace(/^./g, x => x.toUpperCase())
-    //.charAt(0).toUpperCase() + userInput.slice(1)
-    .replace(/\ \w/g, x => x[1].toUpperCase())
-    .replace(/\..+$/, '');
-    return result
+      // Capitalize first letter of string.
+      .replace(/^./g, x => x.toUpperCase())
+      // Removing spaces and capitalizing first letter of word after space.
+      .replace(/\ \w/g, x => x[1].toUpperCase())
+      // Remove appending file extensions.
+      .replace(/\..+$/, '');
+    return result;
   }
-
-  // Helper function finds parent in state, and update with new child element
   searchTreeData(data, target, newName) {
     let formattedName = this.formatName(newName)
     // if tree is empty, create first component at top-level
@@ -88,8 +87,6 @@ class App extends Component {
       }
     };
   }
-
-  // Submits form data and updates state with new component details.
   handleSubmit(e) {
     e.preventDefault()
     const newName = this.state.newName
@@ -114,7 +111,15 @@ class App extends Component {
     this.setState({ newName: '' })
   }
 
-  //function for sending data to Electron server
+  /*****
+    
+  Functions for sending data to Electron server:
+  - exportFiles:        Sends treeData from state to backend for exporting file.
+  - saveFile:           Sends treeData from state to backend for save file.
+  - openFile:           Triggers backend to open "openDialog". 
+  - componentDidMount:  Listens for fileData to be received.
+
+  *****/
   exportFiles(e) {
     e.preventDefault()
     IPC.send('componentTree', this.state.treeData);
@@ -125,16 +130,16 @@ class App extends Component {
   }
   openFile(e) {
     e.preventDefault()
-    IPC.send('openFile','');
-}
-componentDidMount() {
-    IPC.on('fileData', (event,data)=> {
-      this.setState({treeData:data});
-   })
+    IPC.send('openFile', '');
+  }
+  componentDidMount() {
+    IPC.on('fileData', (event, data) => {
+      this.setState({ treeData: data });
+    })
+  }
 
-}
+
   render() {
-
     // Nodekey used to identify node to be removed.
     const getNodeKey = ({ treeIndex }) => treeIndex;
 
@@ -159,7 +164,7 @@ componentDidMount() {
             exportFiles={this.exportFiles}
             openFile={this.openFile}
             saveFile={this.saveFile}
-            />
+          />
           <div className='tree-container'>
             <SortableTree
               className='sortable-tree'
@@ -169,26 +174,25 @@ componentDidMount() {
               generateNodeProps={({ node, path }) => ({
                 buttons: [
                   <button className="deleteButton" onClick={() => this.setState(state => ({
-                      treeData: removeNodeAtPath({
-                        treeData:
+                    treeData: removeNodeAtPath({
+                      treeData:
                         state.treeData,
-                        path,
-                        getNodeKey,
-                      }),
-                    }))}
-                    >X</button>,
-                  ],
-                })}
-                />
-              <div className='logo-container'>
-                <img className='logo' src={require('../assets/logo/48x48.png')} alt='logo'></img>
-              </div>
-
-          </div>
+                      path,
+                      getNodeKey,
+                    }),
+                  }))}
+                  >X</button>,
+                ],
+              })}
+            />
+            <div className='logo-container'>
+              <img className='logo' src={require('../assets/logo/48x48.png')} alt='logo'></img>
+            </div>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
+}
 
-  export default App;
+export default App;
