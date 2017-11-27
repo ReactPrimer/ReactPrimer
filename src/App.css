@@ -9,8 +9,8 @@ body {
   -webkit-app-region: drag;
 }
 
+/* class for tree node created*/
 .rst__nodeContent {
-
 }
 
 /* determines height of tree drag and drop handle*/
@@ -24,10 +24,12 @@ body {
   height: 1.8em !important;
 }
 
+/* Style for row label*/
 .rst__rowLabel {
   margin: 0 auto;
 }
 
+/* */
 .rst__rowToolbar {
 
 }

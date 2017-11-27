@@ -13,7 +13,6 @@ xit();
 
 
 
-
 /*
   check if entering component name triggers onChange
   check if clicking parent triggers onChange

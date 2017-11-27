@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class NewCompForm extends Component {
-
   render() {
     const {
       newName,
@@ -10,7 +9,9 @@ class NewCompForm extends Component {
       handleSelectChange,
       handleSubmit,
       components,
-      exportFiles
+      exportFiles,
+      saveFile,
+      openFile
     } = this.props
 
     // Creates an option element in dropdown menu for each component name in state.
@@ -33,13 +34,13 @@ class NewCompForm extends Component {
               name='name'
               value={newName}
               onChange={handleInputChange}
-              />
+            />
             <br />
             Parent
             <select
               name='parent'
               onChange={handleSelectChange}
-              >
+            >
               <option value='-'>-</option>
               {parents}
             </select>
@@ -48,17 +49,18 @@ class NewCompForm extends Component {
               type='submit'
               value='Add Component'
               onClick={handleSubmit}
-              />
+            />
           </form>
         </div>
         <div className='center-spacer' />
         <div className='button-container'>
+          <button onClick={saveFile}>save</button>
+          <button onClick={openFile}>open</button>
           <button className="export" onClick={exportFiles}>Export </button>
         </div>
       </div>
     );
   }
-
 }
 
 export default NewCompForm;

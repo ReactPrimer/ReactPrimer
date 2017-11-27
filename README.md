@@ -1,3 +1,4 @@
+<img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">
 <h1><center>ReactPrimer </center></h1>
 <p align="center">
   <img src="/assets/icons/png/128x128.png">
