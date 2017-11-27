@@ -24,7 +24,7 @@ const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
 // for development - Hot-Reloading
-require('electron-reload')(__dirname);
+// require('electron-reload')(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -75,12 +75,12 @@ function createWindow() {
   Menu.setApplicationMenu(menu);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
 
   /*****
-   
-  Functions for Electron backend functionality: 
+
+  Functions for Electron backend functionality:
     componentTree:
     - the IPC listens for component info to be received from the front end.
     - openDialog lets user to select where exported file folder will be generated.
@@ -93,7 +93,7 @@ function createWindow() {
 
     saveFile:
     - allows user to save project file
-    
+
   *****/
   IPC.on('componentTree', (event, components) => {
     let flattenComps = flattenComponent(components);
@@ -147,9 +147,9 @@ function createWindow() {
   });
 
   /*****
-    
+
   Requires in direct path for React Dev Tools:
-    - File path will be unique to the dev tools location on the developer's machine. 
+    - File path will be unique to the dev tools location on the developer's machine.
 
   *****/
   // const configValues = require('./config');

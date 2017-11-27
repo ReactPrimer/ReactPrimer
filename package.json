@@ -31,7 +31,6 @@
   "author": "KVK",
   "license": "CC0-1.0",
   "devDependencies": {
-    "about-window": "^1.8.0",
     "babel-core": "^6.23.1",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
@@ -52,6 +51,7 @@
     "webpack": "^2.7.0"
   },
   "dependencies": {
+    "about-window": "^1.8.0",
     "babel-preset-es2015": "^6.24.1",
     "electron-packager-interactive": "^0.1.2",
     "enzyme": "^3.2.0",

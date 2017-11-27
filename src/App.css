@@ -37,7 +37,7 @@ body {
 /*sets the height and color of the landing pad*/
 .rst__rowCancelPad::before,.rst__rowLandingPad::before {
   height:1.8em !important;
-  background-color:gray;
+  background-color:grey;
   opacity: .3;
 }
 
@@ -65,6 +65,7 @@ body {
 .right-spacer {
   flex: 3;
   display: flex;
+  background-color: white;
 }
 
 .filler-a {
