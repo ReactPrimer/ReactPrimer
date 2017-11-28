@@ -1,11 +1,9 @@
-<img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">   <img src="https://img.shields.io/packagist/l/doctrine/orm.svg">  
+
 <img src="[[https://github.com/ReactPrimer/ReactPrimer/releases](https://img.shields.io/github/release/qubyte/rubidium/all.svg)]()">
 
 
-<h1><center>ReactPrimer </center></h1>
-<p align="center">
-  <img src="/assets/icons/png/128x128.png">
-</p>
+# ReactPrimer &middot; <img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ReactPrimer/ReactPrimer/blob/master/LICENSE.md) [![GitHub (pre-)release](https://img.shields.io/github/release/qubyte/rubidium/all.svg)](https://github.com/ReactPrimer/ReactPrimer/releases/tag/0.0.0.0.2)
+<p align="center"><img src="/assets/icons/png/128x128.png"></p>
 
 <p align="center">React Primer is component prototyping tool that generates fully connected class component code.</p>
 <p align="center">
