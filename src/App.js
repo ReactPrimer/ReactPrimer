@@ -44,8 +44,8 @@ class App extends Component {
   }
 
   /*****
- 
-  Functions for form data submission: 
+
+  Functions for form data submission:
   - handleInputChange:  Updates a placeholder in state with text input value.
   - handleSelectChange: Updates a placeholder in state with selected value.
   - formatName:         Formats casing and spacing, and removes file extenions from input.
@@ -64,7 +64,9 @@ class App extends Component {
       // Capitalize first letter of string.
       .replace(/^./g, x => x.toUpperCase())
       // Removing spaces and capitalizing first letter of word after space.
-      .replace(/\ \w/g, x => x[1].toUpperCase())
+      .replace(/\s\w/g, x => x[1].toUpperCase())
+      .replace(/\s+\W\w/g, x => x[x.length-1].toUpperCase())
+      .replace(/\ +/g, x => '')
       // Remove appending file extensions.
       .replace(/\..+$/, '');
     return result;
@@ -112,11 +114,11 @@ class App extends Component {
   }
 
   /*****
-    
+
   Functions for sending data to Electron server:
   - exportFiles:        Sends treeData from state to backend for exporting file.
   - saveFile:           Sends treeData from state to backend for save file.
-  - openFile:           Triggers backend to open "openDialog". 
+  - openFile:           Triggers backend to open "openDialog".
   - componentDidMount:  Listens for fileData to be received.
 
   *****/
