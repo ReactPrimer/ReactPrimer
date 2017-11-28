@@ -19,14 +19,14 @@
 3. Move React Primer to you local application folder.
 
 ###### Windows
-1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .exe file  
-2. Unpackage the .exe file 
-3. Follow installation process
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .exe file.  
+2. Unpackage the .exe file. 
+3. Follow installation process.
 
 ###### Linux
-1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .deb file  
-2. Unpackage the .deb file 
-3. Find the executable in  usr/lib/React-Primer
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .deb file.  
+2. Unpackage the .deb file. 
+3. Find the executable in usr/lib/React-Primer.
 
 ## Usage
 
