@@ -5,7 +5,7 @@
 # ReactPrimer &middot; <img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ReactPrimer/ReactPrimer/blob/master/LICENSE.md) [![GitHub (pre-)release](https://img.shields.io/github/release/qubyte/rubidium/all.svg)](https://github.com/ReactPrimer/ReactPrimer/releases/tag/0.0.0.0.2)
 <p align="center"><img src="/assets/icons/png/128x128.png"></p>
 
-<p align="center">React Primer is component prototyping tool that generates fully connected class component code.</p>
+<p align="center">React Primer is a component prototyping tool that generates fully connected class component code.</p>
 <p align="center">
 <img src="/assets/demo/demo_15mb.gif"/>
 </p>
@@ -16,7 +16,7 @@
 
 1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/ReactPrimer.dmg) the latest release .dmg file.
 2. Open the installer.
-3. Move React Primer to you local application folder.
+3. Move React Primer to your local application folder.
 
 ###### Windows
 1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .exe file.  
@@ -37,6 +37,8 @@
 * Export project to generate a folder of fully connected component classes.
 
 * Save generated components locally to a new or existing project.
+
+* Use Save/Load feature to revisit a prototype.
 
 ## Forking Your Own Version
 **If you'd like to build your own version of React Primer:**
