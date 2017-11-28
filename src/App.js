@@ -191,9 +191,9 @@ class App extends Component {
                   ],
                 })}
                 />
-              <div className='logo-container'>
+              {/*}<div className='logo-container'>
                 <img className='logo' src={require('../assets/logo/48x48.png')} alt='logo'></img>
-              </div>
+              </div>*/}
             </div>
           </div>
         </div>
