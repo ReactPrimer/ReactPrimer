@@ -1,4 +1,7 @@
-<img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">
+<img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">   <img src="https://img.shields.io/packagist/l/doctrine/orm.svg">  
+<img src="[[https://github.com/ReactPrimer/ReactPrimer/releases](https://img.shields.io/github/release/qubyte/rubidium/all.svg)]()">
+
+
 <h1><center>ReactPrimer </center></h1>
 <p align="center">
   <img src="/assets/icons/png/128x128.png">
@@ -17,13 +20,15 @@
 2. Open the installer.
 3. Move React Primer to you local application folder.
 
+###### Windows
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .exe file  
+2. Unpackage the .exe file 
+3. Follow installation process
+
 ###### Linux
 1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .deb file  
 2. Unpackage the .deb file 
 3. Find the executable in  usr/lib/React-Primer
-
-###### Windows
-*Coming Soon*
 
 ## Usage
 
