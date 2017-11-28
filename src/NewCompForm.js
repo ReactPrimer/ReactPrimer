@@ -35,7 +35,8 @@ class NewCompForm extends Component {
               value={newName}
               onChange={handleInputChange}
             />
-            <br />
+          {this.props.errMsg ? <span className='comp-name'>{this.props.errMsg}</span> : <span className='comp-name' />}
+        
             Parent
             <select
               name='parent'

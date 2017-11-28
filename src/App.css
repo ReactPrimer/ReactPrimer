@@ -144,6 +144,12 @@ form {
   flex-direction: column;
 }
 
+.comp-name {
+  color: #dc3842;
+  height: 1em;
+  padding: .1em;
+}
+
 .center-spacer {
   grid-row-start: 32;
   grid-row-end: 99;
@@ -159,7 +165,7 @@ form {
 }
 
 .open-button {
-  padding: 0;
+  padding: 1px 0 1px 0;
   margin: 0 2% 8% 5%;
   width: 90%;
   color: #4C5259;
@@ -169,7 +175,7 @@ form {
 }
 
 .save-button {
-  padding: 0;
+  padding: 1px 0 1px 0;
   margin: 0 5% 8% 2%;
   width: 90%;
   color: #4C5259;

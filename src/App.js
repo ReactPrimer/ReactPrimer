@@ -15,7 +15,8 @@ class App extends Component {
         children: []
       }],
       newName: '',
-      newParent: '-'
+      newParent: '-',
+      errMsg: false,
     };
     this.extractCompNames = this.extractCompNames.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -33,7 +34,7 @@ class App extends Component {
   extractCompNames(components, flattened = [], cache = {}) {
     components.forEach((element, index) => {
       let name =
-        element.title
+      element.title
       if (!cache[name]) {
         cache[name] = true;
         flattened.push(element.title);
@@ -61,14 +62,14 @@ class App extends Component {
   }
   formatName(userInput) {
     let result = userInput
-      // Capitalize first letter of string.
-      .replace(/^./g, x => x.toUpperCase())
-      // Removing spaces and capitalizing first letter of word after space.
-      .replace(/\s\w/g, x => x[1].toUpperCase())
-      .replace(/\s+\W\w/g, x => x[x.length-1].toUpperCase())
-      .replace(/\ +/g, x => '')
-      // Remove appending file extensions.
-      .replace(/\..+$/, '');
+    // Capitalize first letter of string.
+    .replace(/^./g, x => x.toUpperCase())
+    // Removing spaces and capitalizing first letter of word after space.
+    .replace(/\s\w/g, x => x[1].toUpperCase())
+    .replace(/\s+\W\w/g, x => x[x.length-1].toUpperCase())
+    .replace(/\ +/g, x => '')
+    // Remove appending file extensions.
+    .replace(/\..+$/, '');
     return result;
   }
   searchTreeData(data, target, newName) {
@@ -96,7 +97,9 @@ class App extends Component {
     const target = this.state.newParent;
     const tree = this.state.treeData.slice();
     if (newName === '') {
-      alert('Please enter a component name.')
+      console.log("should have set state")
+      this.setState({ errMsg: 'Please enter a component name.' })
+      // alert('Please enter a component name.')
     }
     else if (newParent === '-' || tree.length === 0) {
       tree.push({
@@ -104,13 +107,13 @@ class App extends Component {
         expanded: true,
         children: []
       })
-      this.setState({ treeData: tree })
+      this.setState({ treeData: tree, errMsg: false })
     }
     else {
       this.searchTreeData(tree, target, newName)
-      this.setState({ treeData: tree })
+      this.setState({ treeData: tree, errMsg: false })
     }
-    this.setState({ newName: '' })
+    this.setState({newName: ''})
   }
 
   /*****
@@ -158,6 +161,7 @@ class App extends Component {
           <NewCompForm
             newName={this.state.newName}
             newParent={this.state.newParent}
+            errMsg={this.state.errMsg}
             extractCompNames={this.extractCompNames}
             handleInputChange={this.handleInputChange}
             handleSelectChange={this.handleSelectChange}
@@ -166,7 +170,7 @@ class App extends Component {
             exportFiles={this.exportFiles}
             openFile={this.openFile}
             saveFile={this.saveFile}
-          />
+            />
           <div className='tree-container'>
             <SortableTree
               className='sortable-tree'
@@ -176,25 +180,25 @@ class App extends Component {
               generateNodeProps={({ node, path }) => ({
                 buttons: [
                   <button className="deleteButton" onClick={() => this.setState(state => ({
-                    treeData: removeNodeAtPath({
-                      treeData:
+                      treeData: removeNodeAtPath({
+                        treeData:
                         state.treeData,
-                      path,
-                      getNodeKey,
-                    }),
-                  }))}
-                  >X</button>,
-                ],
-              })}
-            />
-            <div className='logo-container'>
-              <img className='logo' src={require('../assets/logo/48x48.png')} alt='logo'></img>
+                        path,
+                        getNodeKey,
+                      }),
+                    }))}
+                    >X</button>,
+                  ],
+                })}
+                />
+              <div className='logo-container'>
+                <img className='logo' src={require('../assets/logo/48x48.png')} alt='logo'></img>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-}
 
-export default App;
+  export default App;
