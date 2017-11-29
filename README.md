@@ -2,7 +2,8 @@
 <img src="[[https://github.com/ReactPrimer/ReactPrimer/releases](https://img.shields.io/github/release/qubyte/rubidium/all.svg)]()">
 
 
-# ReactPrimer &middot; <img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ReactPrimer/ReactPrimer/blob/master/LICENSE.md) [![GitHub (pre-)release](https://img.shields.io/github/release/qubyte/rubidium/all.svg)](https://github.com/ReactPrimer/ReactPrimer/releases/tag/0.0.0.0.2)
+# ReactPrimer &middot; <img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ReactPrimer/ReactPrimer/blob/master/LICENSE.md) [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/ReactPrimer/ReactPrimer/releases/tag/1.0.0)
+
 <p align="center"><img src="/assets/icons/png/128x128.png"></p>
 
 <p align="center">React Primer is a component prototyping tool that generates fully connected class component code.</p>
@@ -14,17 +15,18 @@
 
 ###### MacOS
 
-1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/ReactPrimer.dmg) the latest release .dmg file.
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/1.0.0/ReactPrimer.dmg) the latest release .dmg file.
 2. Open the installer.
 3. Move React Primer to your local application folder.
 
 ###### Windows
-1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .exe file.  
-2. Unpackage the .exe file. 
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/1.0.0/ReactPrimer-win32-x64.zip) the latest .zip file.  
+2. Unpackage the .zip file.
+3. Shortcut .exe file to destktop.
 3. Follow installation process.
 
 ###### Linux
-1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/0.0.0.0.2/React-Primer_1.0.0_amd64.deb) the latest .deb file.  
+1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/1.0.0/React-Primer_1.0.0_amd64.deb) the latest .deb file.  
 2. Unpackage the .deb file. 
 3. Find the executable in usr/lib/React-Primer.
 
