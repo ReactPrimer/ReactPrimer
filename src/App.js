@@ -153,8 +153,8 @@ class App extends Component {
         <div className='top-spacer'>
           <div className='left-spacer' />
           <div className='right-spacer'>
-            <div className='filler-a' />
-            <div className='filler-b' />
+            {/*<div className='filler-a' />
+            <div className='filler-b' />*/}
           </div>
         </div>
         <div className='container'>
