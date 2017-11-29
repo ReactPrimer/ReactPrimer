@@ -35,7 +35,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
     width: 720,
-    height: 420,
+    height: 450,
     minWidth: 645,
     minHeight: 360,
     icon: path.join(__dirname, './assets/icons/png/128x128.png')
