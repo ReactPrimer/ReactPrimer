@@ -1,3 +1,7 @@
+<img align="left" width="100" height="100" src="/assets/icons/png/128x128.png">
+<h1>ReactPrimer</h1>
+
+<img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ReactPrimer/ReactPrimer/blob/master/LICENSE.md) [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/ReactPrimer/ReactPrimer/releases/tag/1.0.0)
 
 <img src="[[https://github.com/ReactPrimer/ReactPrimer/releases](https://img.shields.io/github/release/qubyte/rubidium/all.svg)]()">
 
