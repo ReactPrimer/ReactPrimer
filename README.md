@@ -25,7 +25,7 @@
 ###### Linux
 1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/1.0.0/React-Primer_1.0.0_amd64.deb) the latest .deb file.  
 2. Unpackage the .deb file. 
-3. Find the executable in usr/lib/React-Primer.
+3. Type in React-Primer from the terminal.
 
 ## Usage
 
