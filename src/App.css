@@ -68,13 +68,13 @@ body {
   background-color: white;
 }
 
-.filler-a {
+/*.filler-a {
   flex: 10;
 }
 
 .filler-b {
   flex: 1;
-}
+}*/
 
 .container {
   display: flex;
@@ -95,12 +95,12 @@ body {
   flex: 10;
 }
 
-.logo-container {
+/*.logo-container {
   flex: 1;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-}
+}*/
 
 img {
   padding: 0% 20% 20% 0%;
