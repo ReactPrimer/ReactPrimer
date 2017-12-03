@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import SortableTree, { removeNodeAtPath } from 'react-sortable-tree';
+import SortableTree, { removeNodeAtPath, changeNodeAtPath } from 'react-sortable-tree';
 import NewCompForm from './NewCompForm';
 import './App.css'
 const IPC = require('electron').ipcRenderer;
@@ -27,7 +27,6 @@ class App extends Component {
     this.exportFiles = this.exportFiles.bind(this);
     this.saveFile = this.saveFile.bind(this);
     this.openFile = this.openFile.bind(this);
-
   }
 
   // Helper function creates an array of all component names to be used for form dropdown.
@@ -143,7 +142,6 @@ class App extends Component {
     })
   }
 
-
   render() {
     // Nodekey used to identify node to be removed.
     const getNodeKey = ({ treeIndex }) => treeIndex;
@@ -179,6 +177,8 @@ class App extends Component {
               // button for removing component
               generateNodeProps={({ node, path }) => ({
                 buttons: [
+                  // <button className="editbutton" onClick={changeString}
+                  //   >EDIT</button>,
                   <button className="deleteButton" onClick={() => this.setState(state => ({
                       treeData: removeNodeAtPath({
                         treeData:
@@ -189,11 +189,32 @@ class App extends Component {
                     }))}
                     >X</button>,
                   ],
+                  title: (
+               <input
+                //  style={{ fontSize: '1.1rem' }}
+                value={node.title}
+                 onChange={event => {
+                   const title = this.formatName(event.target.value);
+
+                   this.setState(state => ({
+                     treeData: changeNodeAtPath({
+                       treeData: state.treeData,
+                       path,
+                       getNodeKey,
+                       newNode: { ...node, title },
+                     }),
+                   }));
+                 }}
+               />
+             ),
+
                 })}
                 />
-              {/*}<div className='logo-container'>
-                <img className='logo' src={require('../assets/logo/48x48.png')} alt='logo'></img>
-              </div>*/}
+
+              <div className='logo-container'>
+                {/* <img className='logo' src={require('../assets/logo/48x48.png')} alt='logo'></img> */}
+              </div>
+
             </div>
           </div>
         </div>
