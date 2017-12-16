@@ -19,7 +19,7 @@
 ###### Windows
 1. [Download](https://github.com/ReactPrimer/ReactPrimer/releases/download/1.0.0/ReactPrimer-win32-x64.zip) the latest .zip file.  
 2. Unpackage the .zip file.
-3. Shortcut .exe file to destktop.
+3. Shortcut .exe file to desktop.
 3. Follow installation process.
 
 ###### Linux
@@ -42,7 +42,7 @@
 ## Forking Your Own Version
 **If you'd like to build your own version of React Primer:**
 
-1. Clone the repo and `npm install` dependancies.
+1. Clone the repo and `npm install` dependencies.
 
 2. Open one terminal and `npm run dev` to generate the webpack build.
 
@@ -50,7 +50,7 @@
 
 4. Uncomment line 23 `require('electron-reload')(__dirname);` for hot reloading (Optional).
 
-3. Enable Devloper Tools (Optional).
+3. Enable Developer Tools (Optional).
 
 &nbsp;&nbsp;&nbsp;&nbsp; *Chrome Developer Tool*
 
