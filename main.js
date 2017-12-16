@@ -24,7 +24,7 @@ const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
 // for development - Hot-Reloading
-// require('electron-reload')(__dirname);
+ // require('electron-reload')(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
