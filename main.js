@@ -12,7 +12,7 @@ const BrowserWindow = electron.BrowserWindow
 const IPC = require('electron').ipcMain;
 const { dialog } = require('electron');
 const Menu = electron.Menu;
-const openAboutWindow = require('about-window').default;
+// const openAboutWindow = require('about-window').default;
 
 // required node modules
 const path = require('path');
@@ -24,7 +24,7 @@ const fileContent = require('./fileContent.js');
 const flattenComponent = require('./flattenComponent.js');
 
 // for development - Hot-Reloading
-// require('electron-reload')(__dirname);
+ // require('electron-reload')(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -35,7 +35,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
     width: 720,
-    height: 420,
+    height: 450,
     minWidth: 645,
     minHeight: 360,
     icon: path.join(__dirname, './assets/icons/png/128x128.png')
@@ -48,31 +48,31 @@ function createWindow() {
   }))
 
   // About React-Primer window in menu
-  const menu = Menu.buildFromTemplate([
-    {
-      label: 'React Primer',
-      submenu: [
-        {
-          label: 'About React Primer',
-          click: () => openAboutWindow({
-            icon_path: path.join(__dirname, './assets/icons/png/256x256.png'),
-            copyright: 'Copyright © 2017 React Primer. All Rights Reserved.',
-            homepage: 'http://react-primer.com/',
-            bug_report_url: 'https://github.com/ReactPrimer/ReactPrimer/issues',
-            description: "React Prototyping Tool"
-          })
-        },
-        {
-          label: 'Quit',
-          accelerator: 'CmdOrCtrl+Q',
-          click: () => {
-            app.quit();
-          }
-        },
-      ]
-    }
-  ]);
-  Menu.setApplicationMenu(menu);
+  // const menu = Menu.buildFromTemplate([
+  //   {
+  //     label: 'React Primer',
+  //     submenu: [
+  //       {
+  //         label: 'About React Primer',
+  //         click: () => openAboutWindow({
+  //           icon_path: path.join(__dirname, './assets/icons/png/256x256.png'),
+  //           copyright: 'Copyright © 2017 React Primer. All Rights Reserved.',
+  //           homepage: 'http://react-primer.com/',
+  //           bug_report_url: 'https://github.com/ReactPrimer/ReactPrimer/issues',
+  //           description: "React Prototyping Tool"
+  //         })
+  //       },
+  //       {
+  //         label: 'Quit',
+  //         accelerator: 'CmdOrCtrl+Q',
+  //         click: () => {
+  //           app.quit();
+  //         }
+  //       },
+  //     ]
+  //   }
+  // ]);
+  // Menu.setApplicationMenu(menu);
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
