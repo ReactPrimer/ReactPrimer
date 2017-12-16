@@ -6,7 +6,7 @@ body {
   font-family: 'Nunito Sans', sans-serif;
   margin: 0;
   height: 100%;
-  -webkit-app-region: drag;
+  /*-webkit-app-region: drag;*/
 }
 
 /* class for tree node created*/
@@ -91,7 +91,7 @@ body {
 }
 
 .sortable-tree {
-  -webkit-app-region: no-drag;
+  /*-webkit-app-region: no-drag;*/
   flex: 10;
 }
 
@@ -126,7 +126,7 @@ h1 {
   font-weight: 300;
   font-size: 1em;
   color: #D9D9D9;
-  -webkit-app-region: no-drag;
+  /*-webkit-app-region: no-drag;*/
 }
 
 .form {
@@ -134,7 +134,7 @@ h1 {
   grid-row-end: 32;
   font-size: .8em;
   color: #D9D9D9;
-  -webkit-app-region: no-drag;
+  /*-webkit-app-region: no-drag;*/
   background-color: #4C5259;
 }
 
@@ -159,7 +159,7 @@ form {
 .save-load-container {
   grid-row-start: 99;
   grid-row-end: 100;
-  -webkit-app-region: no-drag;
+  /*-webkit-app-region: no-drag;*/
   display: flex;
   justify-content: center;
 }
@@ -187,7 +187,7 @@ form {
 .button-container {
   grid-row-start: 100;
   grid-row-end: 101;
-  -webkit-app-region: no-drag;
+  /*-webkit-app-region: no-drag;*/
 }
 
 .export {
