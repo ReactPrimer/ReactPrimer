@@ -1,5 +1,5 @@
 
-# ReactPrimer &middot; <img src="https://travis-ci.org/kenhughlee/ReactPrimer.svg?branch=master">   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ReactPrimer/ReactPrimer/blob/master/LICENSE.md) [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/ReactPrimer/ReactPrimer/releases/tag/1.0.0)
+# ReactPrimer &middot; <img src="https://travis-ci.org/ReactPrimer/ReactPrimer.svg?branch=master">   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ReactPrimer/ReactPrimer/blob/master/LICENSE.md) [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/ReactPrimer/ReactPrimer/releases/tag/1.0.0)
 
 <p align="center"><img src="/assets/icons/png/128x128.png"></p>
 
