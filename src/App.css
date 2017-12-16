@@ -91,7 +91,7 @@ body {
 }
 
 .sortable-tree {
-  -webkit-app-region: no-drag;
+  /*-webkit-app-region: no-drag;*/
   flex: 10;
 }
 
@@ -134,7 +134,7 @@ h1 {
   grid-row-end: 32;
   font-size: .8em;
   color: #D9D9D9;
-  -webkit-app-region: no-drag;
+  /*-webkit-app-region: no-drag;*/
   background-color: #4C5259;
 }
 
@@ -187,7 +187,7 @@ form {
 .button-container {
   grid-row-start: 100;
   grid-row-end: 101;
-  -webkit-app-region: no-drag;
+  /*-webkit-app-region: no-drag;*/
 }
 
 .export {
