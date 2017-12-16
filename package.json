@@ -38,6 +38,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.18.0",
     "css-loader": "^0.26.1",
     "electron": "~1.7.8",
     "electron-builder": "^19.45.4",
@@ -55,16 +56,16 @@
     "webpack": "^2.7.0"
   },
   "dependencies": {
-    "about-window": "^1.8.0",
-    "babel-preset-es2015": "^6.24.1",
-    "electron-packager-interactive": "^0.1.2",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0",
-    "enzyme-to-json": "^3.2.2",
-    "path": "^0.12.7",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-sortable-tree": "^1.5.0",
-    "react-test-renderer": "^16.1.1"
+    "about-window": "1.8.0",
+    "babel-preset-es2015": "6.24.1",
+    "electron-packager-interactive": "0.1.2",
+    "enzyme": "3.2.0",
+    "enzyme-adapter-react-16": "1.1.0",
+    "enzyme-to-json": "3.2.2",
+    "path": "0.12.7",
+    "react": "16.0.0",
+    "react-dom": "16.0.0",
+    "react-sortable-tree": "1.5.0",
+    "react-test-renderer": "16.1.1"
   }
 }
