@@ -12,6 +12,7 @@ class App extends Component {
       treeData: [{
         title: 'App',
         expanded: true,
+        isStateful: true,
         children: []
       }],
       newName: '',
@@ -27,7 +28,21 @@ class App extends Component {
     this.exportFiles = this.exportFiles.bind(this);
     this.saveFile = this.saveFile.bind(this);
     this.openFile = this.openFile.bind(this);
+    this.default = this.default.bind(this);
   }
+
+  default(node,path,getNodeKey) {
+    if (!('isStateful' in node)) {
+    this.setState(state => ({
+       treeData: changeNodeAtPath({
+         treeData: state.treeData,
+         path,
+         getNodeKey,
+         newNode: { ...node, isStateful:true }
+       })
+     }))
+   }
+   }
 
   // Helper function creates an array of all component names to be used for form dropdown.
   extractCompNames(components, flattened = [], cache = {}) {
@@ -145,6 +160,7 @@ class App extends Component {
   render() {
     // Nodekey used to identify node to be removed.
     const getNodeKey = ({ treeIndex }) => treeIndex;
+    let isStateful = true;
 
     return (
       <div className='top-container'>
@@ -176,9 +192,24 @@ class App extends Component {
               onChange={treeData => this.setState({ treeData })}
               // button for removing component
               generateNodeProps={({ node, path }) => ({
+
+                //set to default stateful=true
+                default: this.default(node,path,getNodeKey),
+
                 buttons: [
-                  // <button className="editbutton" onClick={changeString}
-                  //   >EDIT</button>,
+
+                  <button onClick={()=> {
+                    node.isStateful ? isStateful = false : isStateful = true;
+                    this.setState(state => ({
+                      treeData: changeNodeAtPath({
+                        treeData: state.treeData,
+                        path,
+                        getNodeKey,
+                        newNode: { ...node, isStateful:isStateful },
+                      }),
+                    }))
+                  }}>{node.isStateful ? 'stateful' : 'stateless'}</button>,
+
                   <button className="deleteButton" onClick={() => this.setState(state => ({
                       treeData: removeNodeAtPath({
                         treeData:
