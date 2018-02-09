@@ -7,6 +7,7 @@ function flattenComponent(components: Array<Object>, flattened: Array<Object> = 
     let obj: Object = {};
     obj['title'] = element.title;
     obj['children'] = element.children;
+    obj['isStateful'] = element.isStateful;
     flattened.push(obj);
     flattenComponent(components[index].children, flattened);
   })
