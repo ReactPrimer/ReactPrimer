@@ -14,7 +14,15 @@ function fileContent(component: Object): string {
     }
   }
 
-  content += `\nclass ${component.title} extends Component {\n`;
+  if(component.isStateful)  {
+  content += `\nclass ${component.title} extends Component {`;
+  content += `\n  constructor(props) {`;
+  content += `\n    super(props)\n`;
+  content += `  }\n`;
+  }
+  else
+  content += `\nconst ${component.title} = props => {\n`;
+
   content += `  render() {\n`;
   content += `    return (\n`;
   content += `      <div>\n`;
@@ -27,6 +35,10 @@ function fileContent(component: Object): string {
   content += `  };\n`;
   content += `}\n`;
   content += `export default ${component.title};`;
+
+
+
+
 
   return content;
 }
