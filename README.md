@@ -50,7 +50,7 @@
 
 4. Uncomment line 23 `require('electron-reload')(__dirname);` for hot reloading (Optional).
 
-3. Enable Devloper Tools (Optional).
+3. Enable Developer Tools (Optional).
 
 &nbsp;&nbsp;&nbsp;&nbsp; *Chrome Developer Tool*
 
